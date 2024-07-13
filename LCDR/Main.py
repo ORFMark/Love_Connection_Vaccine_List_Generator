@@ -4,9 +4,10 @@ from LCDR.DataModels.Dog import generateDogInfoString
 from LCDR.Excel.ColumnNames import HEADER_ROW, INFO_ROW, AdoptableColums
 from LCDR.Excel.DataParser.ColorInterpretor import getCellColor, CellColor
 from LCDR.Excel.DataParser.DogModels import AdoptableDogRecord, AdoptedDogRecord
+from LCDR.Excel.DataParser.TypeChecker import isValidChipCode
 from LCDR.Output.Files import exportAdoptableDogMessagesToFile, exportAdoptedDogMessagesToFile, writeEventListToFile
 from LCDR.Output.Shell import generateVaccinePersonReport
-from LCDR.Utils import NEXT_WEEK
+from LCDR.Utils import NEXT_WEEK, getDogCountsByFoster
 
 
 def main():
@@ -61,6 +62,26 @@ def main():
     exportAdoptableDogMessagesToFile(adoptableDogsWithNeeds)
     exportAdoptedDogMessagesToFile(adoptedDogsWithNeeds)
     writeEventListToFile(allDogsWithNeeds)
+    fostersToContact = getDogCountsByFoster(allDogsWithNeeds)
+    neededDHLPP = 0;
+    neededBord = 0;
+    neededChips = 0;
+    for dog in allDogsWithNeeds:
+        dogNeedsDLHPP = dog.getNextDueDHLPPVaccine() and dog.getNextDueDHLPPVaccine() <= NEXT_WEEK
+        dogNeedsMicroChip = not isValidChipCode(dog.chipCode)
+        dogNeedsBordetella = dog.getNextDueBordetellaVaccine() and dog.getNextDueBordetellaVaccine() <= NEXT_WEEK
+        if dogNeedsDLHPP:
+            neededDHLPP += 1
+        if dogNeedsBordetella:
+            neededBord += 1
+        if dogNeedsMicroChip:
+            neededChips += 1
+
+
+
+    print()
+    print(f"There are {len(fostersToContact)} chats to interact with, "
+          f"needing a total of {neededDHLPP} 5:1s, {neededBord} bordetella vaccines, and {neededChips} microchips")
 
 
 if __name__ == "__main__":

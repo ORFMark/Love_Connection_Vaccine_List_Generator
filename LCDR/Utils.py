@@ -17,13 +17,11 @@ def stringifiedDateForFileName(datetimeToDisplay):
 
 
 def getDogCountsByFoster(listOfDogs):
-    fostersToNotify = dict()
+    fosters = dict()
     for dog in listOfDogs:
         foster = dog.foster
-        if fostersToNotify.get(foster):
-            fostersToNotify[foster].append(dog)
+        if fosters.get(foster):
+            fosters[foster].append(dog)
         else:
-            fostersToNotify[foster] = [dog]
-    fosters = fostersToNotify.keys();
-    for foster in fosters:
-        print(f"{foster} has {len(fostersToNotify[foster])}")
+            fosters[foster] = [dog]
+    return fosters

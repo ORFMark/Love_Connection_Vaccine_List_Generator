@@ -1,7 +1,7 @@
 import csv
 
 from LCDR.DataModels.Dog import generateDogInfoString
-from LCDR.Utils import TODAY, NEXT_WEEK, stringifiedDateForFileName
+from LCDR.Utils import TODAY, NEXT_WEEK, stringifiedDateForFileName, stringifiedDate
 from LCDR.Excel.DataParser.TypeChecker import isValidChipCode
 
 
@@ -14,7 +14,7 @@ def exportMessagesToCSV(adoptableDogsNeedingVaccines):
         else:
             fostersToNotify[foster] = [dog]
     fosters = fostersToNotify.keys();
-    with open("Output/messages.txt", "w", newline='') as csvFile:
+    with open("../Output/messages.txt", "w", newline='') as csvFile:
         messageWriter = csv.writer(csvFile, delimiter='\n', quotechar="\t")
         for foster in fosters:
             messageString = "";
@@ -32,7 +32,7 @@ def exportMessagesToCSV(adoptableDogsNeedingVaccines):
 
 
 def exportAdoptableDogMessagesToFile(adoptableDogsNeedingVaccines):
-    filename = f"Adoptable_Dog_messages_{stringifiedDateForFileName(TODAY)}.txt"
+    filename = f"../Output/Adoptable_Dog_messages_{stringifiedDateForFileName(TODAY)}.txt"
     fostersToNotify = dict()
     for dog in adoptableDogsNeedingVaccines:
         foster = dog.foster
@@ -67,7 +67,7 @@ def exportAdoptableDogMessagesToFile(adoptableDogsNeedingVaccines):
 
 
 def exportAdoptedDogMessagesToFile(adoptableDogsNeedingVaccines):
-    filename = f"Adopted_Dog_messages_{stringifiedDateForFileName(TODAY)}.txt"
+    filename = f"../Output/Adopted_Dog_messages_{stringifiedDateForFileName(TODAY)}.txt"
     fostersToNotify = dict()
 
     with open(filename, "w") as f:
@@ -94,25 +94,31 @@ def exportAdoptedDogMessagesToFile(adoptableDogsNeedingVaccines):
 
 
 def writeEventListToFile(dogsToWrite):
-    filename = f"EventFile_{stringifiedDateForFileName(TODAY)}.csv"
+    filename = f"../Output/EventFile_{stringifiedDateForFileName(TODAY)}.csv"
     with open(filename, "w", newline='\n') as eventFile:
         eventWriter = csv.writer(eventFile)
-        eventWriter.writerow(["Dog Name", "Vaccine Volunteer", "Chip", "DHLPP", "Bord"])
+        eventWriter.writerow(["Dog Name", "Vaccine Volunteer", "Chip", "DHLPP", "DHLPP #", "Bord", "Bord #"])
         for dog in dogsToWrite:
             nextDueDHLPP = dog.getNextDueDHLPPVaccine()
+            dhlppDue = dog.DHLPPComplete + 1;
             if (nextDueDHLPP != None and nextDueDHLPP <= NEXT_WEEK):
-                nextDueDHLPP = stringifiedDateForFileName(nextDueDHLPP);
+                nextDueDHLPP = stringifiedDate(nextDueDHLPP);
             else:
                 nextDueDHLPP = ""
+                dhlppDue = ""
             nextDueBord = dog.getNextDueBordetellaVaccine()
+            dueBordNumber = dog.BordetellaComplete + 1
             if nextDueBord != None and nextDueBord <= NEXT_WEEK:
-                nextDueBord = stringifiedDateForFileName(nextDueBord)
+                nextDueBord = stringifiedDate(nextDueBord)
             else:
                 nextDueBord = ""
+                dueBordNumber = ""
             chipCode = ""
             if not isValidChipCode(dog.chipCode):
                 try:
-                    chipCode = stringifiedDateForFileName(dog.chipCode)
+                    chipCode = stringifiedDate(dog.chipCode)
                 except:
                     chipCode = dog.chipCode
-            eventWriter.writerow([dog.name, dog.vaccinePerson, chipCode, nextDueDHLPP, nextDueBord])
+            eventWriter.writerow(
+                [dog.name, dog.vaccinePerson, chipCode, nextDueDHLPP, dhlppDue, nextDueBord, dueBordNumber]
+            )
