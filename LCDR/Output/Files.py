@@ -1,5 +1,8 @@
 import csv
 
+import openpyxl
+from openpyxl.worksheet.table import Table, TableStyleInfo
+
 from LCDR.DataModels.Dog import generateDogInfoString
 from LCDR.Utils import TODAY, NEXT_WEEK, stringifiedDateForFileName, stringifiedDate
 from LCDR.Excel.DataParser.TypeChecker import isValidChipCode
@@ -14,7 +17,7 @@ def exportMessagesToCSV(adoptableDogsNeedingVaccines):
         else:
             fostersToNotify[foster] = [dog]
     fosters = fostersToNotify.keys();
-    with open("../Output/messages.txt", "w", newline='') as csvFile:
+    with open(f"../Output/{stringifiedDateForFileName(TODAY)}/messages.txt", "w", newline='') as csvFile:
         messageWriter = csv.writer(csvFile, delimiter='\n', quotechar="\t")
         for foster in fosters:
             messageString = "";
@@ -32,7 +35,7 @@ def exportMessagesToCSV(adoptableDogsNeedingVaccines):
 
 
 def exportAdoptableDogMessagesToFile(adoptableDogsNeedingVaccines):
-    filename = f"../Output/Adoptable_Dog_messages_{stringifiedDateForFileName(TODAY)}.txt"
+    filename = f"../Output/{stringifiedDateForFileName(TODAY)}/Adoptable_Dog_messages_{stringifiedDateForFileName(TODAY)}.txt"
     fostersToNotify = dict()
     for dog in adoptableDogsNeedingVaccines:
         foster = dog.foster
@@ -67,7 +70,7 @@ def exportAdoptableDogMessagesToFile(adoptableDogsNeedingVaccines):
 
 
 def exportAdoptedDogMessagesToFile(adoptableDogsNeedingVaccines):
-    filename = f"../Output/Adopted_Dog_messages_{stringifiedDateForFileName(TODAY)}.txt"
+    filename = f"../Output/{stringifiedDateForFileName(TODAY)}/Adopted_Dog_messages_{stringifiedDateForFileName(TODAY)}.txt"
     fostersToNotify = dict()
 
     with open(filename, "w") as f:
@@ -93,8 +96,8 @@ def exportAdoptedDogMessagesToFile(adoptableDogsNeedingVaccines):
         f.write("This completes the vaccines for the week, good job!")
 
 
-def writeEventListToFile(dogsToWrite):
-    filename = f"../Output/EventFile_{stringifiedDateForFileName(TODAY)}.csv"
+def writeEventListToCSVFile(dogsToWrite):
+    filename = f"../Output/{stringifiedDateForFileName(TODAY)}/EventFile_{stringifiedDateForFileName(TODAY)}.csv"
     with open(filename, "w", newline='\n') as eventFile:
         eventWriter = csv.writer(eventFile)
         eventWriter.writerow(["Dog Name", "Vaccine Volunteer", "Chip", "DHLPP", "DHLPP #", "Bord", "Bord #"])
@@ -122,3 +125,43 @@ def writeEventListToFile(dogsToWrite):
             eventWriter.writerow(
                 [dog.name, dog.vaccinePerson, chipCode, nextDueDHLPP, dhlppDue, nextDueBord, dueBordNumber]
             )
+
+def writeEventListToExcelFile(dogsToWrite):
+    filename = f"../Output/{stringifiedDateForFileName(TODAY)}/EventFile_{stringifiedDateForFileName(TODAY)}.xlsx"
+    workbook = openpyxl.Workbook();
+    worksheet = workbook.active
+    worksheet.append(["Dog Name", "Vaccine Volunteer", "Chip", "DHLPP", "DHLPP #", "Bord", "Bord #"])
+    for dog in dogsToWrite:
+        nextDueDHLPP = dog.getNextDueDHLPPVaccine()
+        dhlppDue = dog.DHLPPComplete + 1;
+        if (nextDueDHLPP != None and nextDueDHLPP <= NEXT_WEEK):
+            nextDueDHLPP = stringifiedDate(nextDueDHLPP);
+        else:
+            nextDueDHLPP = ""
+            dhlppDue = ""
+        nextDueBord = dog.getNextDueBordetellaVaccine()
+        dueBordNumber = dog.BordetellaComplete + 1
+        if nextDueBord != None and nextDueBord <= NEXT_WEEK:
+            nextDueBord = stringifiedDate(nextDueBord)
+        else:
+            nextDueBord = ""
+            dueBordNumber = ""
+        chipCode = ""
+        if not isValidChipCode(dog.chipCode):
+            try:
+                chipCode = stringifiedDate(dog.chipCode)
+            except:
+                chipCode = dog.chipCode
+        worksheet.append(
+            [dog.name, dog.vaccinePerson, chipCode, nextDueDHLPP, dhlppDue, nextDueBord, dueBordNumber]
+        )
+    tab = Table(displayName="DogEventTable", ref=f"A1:G{len(dogsToWrite) + 1}")
+
+# Add a default style with striped rows and banded columns
+    style = TableStyleInfo(name="TableStyleMedium2", showFirstColumn=False,
+                       showLastColumn=False, showRowStripes=True, showColumnStripes=False)
+    tab.tableStyleInfo = style
+
+    worksheet.add_table(tab)
+
+    workbook.save(filename = filename)

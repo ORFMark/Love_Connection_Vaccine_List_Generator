@@ -1,3 +1,5 @@
+import os.path
+
 import openpyxl
 
 from LCDR.DataModels.Dog import generateDogInfoString
@@ -5,13 +7,17 @@ from LCDR.Excel.ColumnNames import HEADER_ROW, INFO_ROW, AdoptableColums
 from LCDR.Excel.DataParser.ColorInterpretor import getCellColor, CellColor
 from LCDR.Excel.DataParser.DogModels import AdoptableDogRecord, AdoptedDogRecord
 from LCDR.Excel.DataParser.TypeChecker import isValidChipCode
-from LCDR.Output.Files import exportAdoptableDogMessagesToFile, exportAdoptedDogMessagesToFile, writeEventListToFile
+from LCDR.Output.Files import exportAdoptableDogMessagesToFile, exportAdoptedDogMessagesToFile, writeEventListToCSVFile, \
+    writeEventListToExcelFile
+from LCDR.Output.PNG import generateVaccinePersonReportPNG
 from LCDR.Output.Shell import generateVaccinePersonReport
-from LCDR.Utils import NEXT_WEEK, getDogCountsByFoster
+from LCDR.Utils import NEXT_WEEK, getDogCountsByFoster, stringifiedDateForFileName, TODAY
 
 
 def main():
     PATH_TO_FILE = "../Data Files/LCDR_Dog_Sheet_07_11_2024.xlsx"
+    if not os.path.exists(f"../Output/{stringifiedDateForFileName(TODAY)}"):
+        os.makedirs(f"../Output/{stringifiedDateForFileName(TODAY)}")
     wb = openpyxl.load_workbook(PATH_TO_FILE, data_only=True)
     ws = wb.worksheets[0]
     rowNum = 0
@@ -61,7 +67,8 @@ def main():
     generateVaccinePersonReport(allDogsWithNeeds)
     exportAdoptableDogMessagesToFile(adoptableDogsWithNeeds)
     exportAdoptedDogMessagesToFile(adoptedDogsWithNeeds)
-    writeEventListToFile(allDogsWithNeeds)
+    writeEventListToExcelFile(allDogsWithNeeds)
+    generateVaccinePersonReportPNG(allDogsWithNeeds)
     fostersToContact = getDogCountsByFoster(allDogsWithNeeds)
     neededDHLPP = 0;
     neededBord = 0;
@@ -81,7 +88,7 @@ def main():
 
     print()
     print(f"There are {len(fostersToContact)} chats to interact with, "
-          f"needing a total of {neededDHLPP} 5:1s, {neededBord} bordetella vaccines, and {neededChips} microchips")
+          f"needing a total of {neededDHLPP} 5/1s, {neededBord} bordetella vaccines, and {neededChips} microchips")
 
 
 if __name__ == "__main__":
