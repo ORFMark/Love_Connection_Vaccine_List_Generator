@@ -9,27 +9,32 @@ from LCDR.Excel.DataParser.DogModels import AdoptableDogRecord, AdoptedDogRecord
 from LCDR.Excel.DataParser.TypeChecker import isValidChipCode
 from LCDR.Output.Files import exportAdoptableDogMessagesToFile, exportAdoptedDogMessagesToFile, writeEventListToCSVFile, \
     writeEventListToExcelFile
-from LCDR.Output.PNG import generateVaccinePersonReportPNG
+from LCDR.Output.PNG import generateVaccinePersonReportPNG, generateVaccinePersonImage
 from LCDR.Output.Shell import generateVaccinePersonReport
 from LCDR.Utils import NEXT_WEEK, getDogCountsByFoster, stringifiedDateForFileName, TODAY
 
 
 def main():
-    PATH_TO_FILE = "../Data Files/LCDR_Dog_Sheet_07_11_2024.xlsx"
+    PATH_TO_FILE = "../Data Files/LCDR_Dog_Sheet_07_22_2024.xlsx"
     if not os.path.exists(f"../Output/{stringifiedDateForFileName(TODAY)}"):
         os.makedirs(f"../Output/{stringifiedDateForFileName(TODAY)}")
     wb = openpyxl.load_workbook(PATH_TO_FILE, data_only=True)
     ws = wb.worksheets[0]
     rowNum = 0
-    redCell = ws.cell(1, 26)
+    redCell = ws.cell(19, 2)
+    print(getCellColor(redCell))
     adoptableDogsWithNeeds = []
     adoptedDogsWithNeeds = []
-    allDogsWithNeeds = []
     for row in ws:
         rowNum += 1
         if rowNum == HEADER_ROW or rowNum == INFO_ROW:
             continue
-        dog = AdoptableDogRecord(row)
+        if getCellColor(row[AdoptableColums.NAME.value]) == CellColor.PALE_PINK.value:
+            continue
+        if not row[AdoptableColums.NAME.value].value == None:
+            dog = AdoptableDogRecord(row)
+        else:
+            break
         if getCellColor(row[AdoptableColums.VACCINE_PERSON.value]) == CellColor.BRIGHT_GREEN.value:
             continue
         dogHasDHLPPDue = dog.getNextDueDHLPPVaccine() and dog.getNextDueDHLPPVaccine() <= NEXT_WEEK
@@ -56,19 +61,12 @@ def main():
             break
     print(f"There are {len(adoptedDogsWithNeeds)} adopted pups that need a vaccine")
     allDogsWithNeeds = adoptableDogsWithNeeds + adoptedDogsWithNeeds
-    print("Adoptable: ")
-    for dog in adoptableDogsWithNeeds:
-        print(generateDogInfoString(dog))
-    print()
-    print("Adopted: ")
-    for dog in adoptedDogsWithNeeds:
-        print(generateDogInfoString(dog))
-    print()
     generateVaccinePersonReport(allDogsWithNeeds)
     exportAdoptableDogMessagesToFile(adoptableDogsWithNeeds)
     exportAdoptedDogMessagesToFile(adoptedDogsWithNeeds)
     writeEventListToExcelFile(allDogsWithNeeds)
     generateVaccinePersonReportPNG(allDogsWithNeeds)
+    generateVaccinePersonImage(allDogsWithNeeds)
     fostersToContact = getDogCountsByFoster(allDogsWithNeeds)
     neededDHLPP = 0;
     neededBord = 0;
@@ -83,7 +81,6 @@ def main():
             neededBord += 1
         if dogNeedsMicroChip:
             neededChips += 1
-
 
 
     print()

@@ -54,10 +54,9 @@ def exportAdoptableDogMessagesToFile(adoptableDogsNeedingVaccines):
             f.write(generateDogInfoString(dog) + "\n")
         f.write("\n\n")
         for foster in fosters:
-            f.write(f"\n\nHi {foster},\nYour foster(s) have the following vaccines due in the next week: \n ")
+            f.write(f"\n\nHi {foster},\nYour foster(s) have the following vaccines due in the next week: \n")
             for dog in fostersToNotify[foster]:
-                f.write(generateDogInfoString(dog))
-                f.write("\n")
+                f.write(f"\t{generateDogInfoString(dog)}\n")
             if fostersToNotify[foster][0].vaccinePerson and fostersToNotify[foster][0].vaccinePerson != "":
                 f.write(
                     f"\nYour vaccine volunteer is {fostersToNotify[foster][0].vaccinePerson}, they will let you know their availability and you can coordinate from there on date/time/location.\n")
@@ -83,11 +82,11 @@ def exportAdoptedDogMessagesToFile(adoptableDogsNeedingVaccines):
             f.write(generateDogInfoString(dog) + "\n")
         f.write("\n\n")
         for dog in adoptableDogsNeedingVaccines:
-            f.write(f"\n\nYour Pup has the following vaccines due in the next week: \n ")
-            f.write(generateDogInfoString(dog))
+            f.write(f"\n\nYour Pup has the following vaccines due in the next week: \n")
+            f.write(f"\t{generateDogInfoString(dog)}\n")
             if dog.vaccinePerson and dog.vaccinePerson != "":
                 f.write(
-                    f"\n\nYour vaccine volunteer is {dog.vaccinePerson}, they will let you know their availability and you can coordinate from there on date/time/location.\n")
+                    f"\nYour vaccine volunteer is {dog.vaccinePerson}, they will let you know their availability and you can coordinate from there on date/time/location.\n")
             else:
                 f.write(
                     f"\nWe don't have a vaccine person on-file for you, please let us know who is closest to you from the list below, and we will get them added and tagged.\n")

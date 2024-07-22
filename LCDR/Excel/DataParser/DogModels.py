@@ -11,6 +11,11 @@ class AdoptableDogRecord(Dog):
     def __init__(self, excelRow):
         super().__init__()
         self.name = excelRow[AdoptableColums.NAME.value].value
+        self.name = self.name.replace("*", '')
+        self.name = self.name.strip()
+        nameEnd = self.name.find("(")
+        if nameEnd != -1:
+            self.name = self.name[:nameEnd]
         self.gender = excelRow[AdoptableColums.GENDER.value].value
         self.foster = excelRow[AdoptableColums.FOSTER.value].value
         self.chipCode = excelRow[AdoptableColums.CHIP_CODE.value].value
@@ -67,6 +72,8 @@ class AdoptableDogRecord(Dog):
                 result = re.search(DATE_PATTERN_4_DIGIT_YEAR, self.BordetellaDates[i])
                 if (result):
                     self.BordetellaDates[i] = datetime.strptime(result[0], "%m/%d/%Y")
+
+
 
 
 class AdoptedDogRecord(Dog):
@@ -137,3 +144,8 @@ class AdoptedDogRecord(Dog):
                 result = re.search(DATE_PATTERN_4_DIGIT_YEAR, self.BordetellaDates[i])
                 if (result):
                     self.BordetellaDates[i] = datetime.strptime(result[0], "%m/%d/%Y")
+        self.name = self.name.replace("*", '')
+        self.name = self.name.strip()
+        nameEnd = self.name.find("(")
+        if nameEnd != -1:
+            self.name = self.name[:nameEnd]
