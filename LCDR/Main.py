@@ -1,3 +1,4 @@
+from LCDR.UI.Graphical.Controller import GUI
 from LCDR.UI.TextUI import textUI
 
 
