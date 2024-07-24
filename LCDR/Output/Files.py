@@ -17,7 +17,7 @@ def exportMessagesToCSV(adoptableDogsNeedingVaccines):
         else:
             fostersToNotify[foster] = [dog]
     fosters = fostersToNotify.keys();
-    with open(f"../Output/{stringifiedDateForFileName(TODAY)}/messages.txt", "w", newline='') as csvFile:
+    with open(f"./Output/{stringifiedDateForFileName(TODAY)}/messages.txt", "w", newline='') as csvFile:
         messageWriter = csv.writer(csvFile, delimiter='\n', quotechar="\t")
         for foster in fosters:
             messageString = "";
@@ -35,7 +35,7 @@ def exportMessagesToCSV(adoptableDogsNeedingVaccines):
 
 
 def exportAdoptableDogMessagesToFile(adoptableDogsNeedingVaccines):
-    filename = f"../Output/{stringifiedDateForFileName(TODAY)}/Adoptable_Dog_messages_{stringifiedDateForFileName(TODAY)}.txt"
+    filename = f"./Output/{stringifiedDateForFileName(TODAY)}/Adoptable_Dog_messages_{stringifiedDateForFileName(TODAY)}.txt"
     fostersToNotify = dict()
     for dog in adoptableDogsNeedingVaccines:
         foster = dog.foster
@@ -69,7 +69,7 @@ def exportAdoptableDogMessagesToFile(adoptableDogsNeedingVaccines):
 
 
 def exportAdoptedDogMessagesToFile(adoptableDogsNeedingVaccines):
-    filename = f"../Output/{stringifiedDateForFileName(TODAY)}/Adopted_Dog_messages_{stringifiedDateForFileName(TODAY)}.txt"
+    filename = f"./Output/{stringifiedDateForFileName(TODAY)}/Adopted_Dog_messages_{stringifiedDateForFileName(TODAY)}.txt"
     fostersToNotify = dict()
 
     with open(filename, "w") as f:
@@ -96,7 +96,7 @@ def exportAdoptedDogMessagesToFile(adoptableDogsNeedingVaccines):
 
 
 def writeEventListToCSVFile(dogsToWrite):
-    filename = f"../Output/{stringifiedDateForFileName(TODAY)}/EventFile_{stringifiedDateForFileName(TODAY)}.csv"
+    filename = f"./Output/{stringifiedDateForFileName(TODAY)}/EventFile_{stringifiedDateForFileName(TODAY)}.csv"
     with open(filename, "w", newline='\n') as eventFile:
         eventWriter = csv.writer(eventFile)
         eventWriter.writerow(["Dog Name", "Vaccine Volunteer", "Chip", "DHLPP", "DHLPP #", "Bord", "Bord #"])
@@ -126,7 +126,7 @@ def writeEventListToCSVFile(dogsToWrite):
             )
 
 def writeEventListToExcelFile(dogsToWrite):
-    filename = f"../Output/{stringifiedDateForFileName(TODAY)}/EventFile_{stringifiedDateForFileName(TODAY)}.xlsx"
+    filename = f"./Output/{stringifiedDateForFileName(TODAY)}/EventFile_{stringifiedDateForFileName(TODAY)}.xlsx"
     workbook = openpyxl.Workbook();
     worksheet = workbook.active
     worksheet.append(["Dog Name", "Vaccine Volunteer", "Chip", "DHLPP", "DHLPP #", "Bord", "Bord #"])

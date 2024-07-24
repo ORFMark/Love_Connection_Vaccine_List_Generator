@@ -3,7 +3,7 @@ from LCDR.UI.TextUI import textUI
 
 
 def main():
-    textUI()
+    GUI()
 
 
 if __name__ == "__main__":

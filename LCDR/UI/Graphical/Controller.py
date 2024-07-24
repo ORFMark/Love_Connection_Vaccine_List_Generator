@@ -7,6 +7,7 @@ import pygame
 from LCDR.Excel.ColumnNames import AdoptableColums, HEADER_ROW, INFO_ROW
 from LCDR.Excel.DataParser.ColorInterpretor import getCellColor, CellColor
 from LCDR.Excel.DataParser.DogModels import AdoptableDogRecord, AdoptedDogRecord
+from LCDR.Excel.DataParser.TypeChecker import isValidChipCode
 from LCDR.Output.Files import writeEventListToExcelFile, exportAdoptedDogMessagesToFile, \
     exportAdoptableDogMessagesToFile
 from LCDR.Output.PNG import generateVaccinePersonImage, generateVaccinePersonReportPNG
@@ -23,8 +24,8 @@ COLOR_INACTIVE = RGBColors.GRAY.value
 
 def generateFiles(filepath):
     PATH_TO_FILE = filepath
-    if not os.path.exists(f"../Output/{stringifiedDateForFileName(TODAY)}"):
-        os.makedirs(f"../Output/{stringifiedDateForFileName(TODAY)}")
+    if not os.path.exists(f"./Output/{stringifiedDateForFileName(TODAY)}"):
+        os.makedirs(f"./Output/{stringifiedDateForFileName(TODAY)}", exist_ok=True)
     wb = openpyxl.load_workbook(PATH_TO_FILE, data_only=True)
     ws = wb.worksheets[0]
     rowNum = 0
@@ -71,8 +72,6 @@ def generateFiles(filepath):
     exportAdoptableDogMessagesToFile(adoptableDogsWithNeeds)
     exportAdoptedDogMessagesToFile(adoptedDogsWithNeeds)
     writeEventListToExcelFile(allDogsWithNeeds)
-    generateVaccinePersonReportPNG(allDogsWithNeeds)
-    generateVaccinePersonImage(allDogsWithNeeds)
     fostersToContact = getDogCountsByFoster(allDogsWithNeeds)
     neededDHLPP = 0;
     neededBord = 0;

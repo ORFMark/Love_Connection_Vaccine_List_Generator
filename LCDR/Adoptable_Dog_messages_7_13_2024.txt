@@ -1,0 +1,335 @@
+Your vaccine volunteer is {vaccinePerson}, they will let you know their availability and you can coordinate from there on date/time/location.
+
+We don't have a vaccine person on-file for you, please let us know who is closest to you from the list below, and we will get them added and tagged.
+
+There is an event this week on {DATE} at {PLACE}, you can bring your dog there for vaccines
+
+Phoenix: DHLPP #2 and Bordetella #1 on 5/14/2022.
+Oliver: DHLPP #3 on 5/10/2024.
+Fred: DHLPP #3 on 5/10/2024.
+Fritz: DHLPP #3 on 5/10/2024.
+Karl: DHLPP #3 on 5/10/2024.
+Hans: DHLPP #3 on 5/10/2024.
+Jackson: DHLPP #3 on 5/10/2024.
+Alpha (7/22): DHLPP #3 on 7/18/2024.
+Bravo (7/22): DHLPP #3 on 7/18/2024.
+Charlie (7/22): DHLPP #3 on 7/19/2024.
+Delta (7/22): DHLPP #3 on 7/18/2024.
+Echo (7/22): DHLPP #3 on 7/19/2024.
+Jade (8/1): DHLPP #2 and Bordetella #1 on 7/15/2024.
+Josie (8/1): DHLPP #2 and Bordetella #1 on 7/15/2024.
+Joey (8/2): DHLPP #2 and Bordetella #1 on 7/15/2024.
+Jasper (8/2): DHLPP #2 and Bordetella #1 on 7/15/2024.
+*Carolina: DHLPP #2 on 7/16/2024.
+Francesca (7/29): DHLPP #2 and Bordetella #1 on 7/6/2024.
+Edwina (7/29): DHLPP #2 and Bordetella #1 on 7/6/2024.
+Anthony (7/29): DHLPP #2 and Bordetella #1 on 7/6/2024.
+Benedict (7/29): DHLPP #2 and Bordetella #1 on 7/6/2024.
+Ella (7/31): DHLPP #3 on 7/18/2024.
+Coral (7/31): DHLPP #2 and Bordetella #1 on 7/13/2024.
+Everest (7/31): DHLPP #2 and Bordetella #1 on 7/13/2024.
+Zuma (7/31): DHLPP #2 and Bordetella #1 on 7/13/2024.
+Liberty (7/31): DHLPP #2 and Bordetella #1 on 7/13/2024.
+Marshall (7/31): DHLPP #2 and Bordetella #1 on 7/13/2024.
+Rubble (7/31): DHLPP #2 and Bordetella #1 on 7/13/2024.
+Chase (7/31): DHLPP #2 and Bordetella #1 on 7/13/2024.
+Ryder (7/31): DHLPP #2 and Bordetella #1 on 7/13/2024.
+Hannah: DHLPP #2 on 7/16/2024 and a microchip.
+Pied Piper: DHLPP #1 on 7/16/2024 and a microchip.
+Charming: DHLPP #1 on 7/16/2024 and a microchip.
+Phillip: DHLPP #1 on 7/16/2024 and a microchip.
+Bobble: DHLPP #1 on 7/16/2024 and a microchip.
+Guinevere: DHLPP #1 on 7/16/2024 and a microchip.
+Odette: DHLPP #1 on 7/16/2024 and a microchip.
+Little Red: DHLPP #1 on 7/16/2024 and a microchip.
+Thumbelina: DHLPP #1 on 7/16/2024 and a microchip.
+Tiana: DHLPP #1 on 7/16/2024 and a microchip.
+New York (8/5): DHLPP #2 and Bordetella #1 on 7/12/2024.
+Tokyo (8/5): DHLPP #2 and Bordetella #1 on 7/12/2024.
+Dubai (8/5): DHLPP #2 and Bordetella #1 on 7/12/2024.
+London (8/5): DHLPP #2 and Bordetella #1 on 7/12/2024.
+Paris (8/5): DHLPP #2 and Bordetella #1 on 7/12/2024.
+São Paulo (8/5): DHLPP #2 and Bordetella #1 on 7/12/2024.
+Beijing (8/5): DHLPP #2 and Bordetella #1 on 7/12/2024.
+Booker: DHLPP #3 on 7/20/2024.
+Acai Berry (8/12): DHLPP #2 and Bordetella #1 on 7/13/2024, along with a microchip
+Gooseberry (8/12): DHLPP #2 and Bordetella #1 on 7/13/2024, along with a microchip
+Huckleberry (8/12): DHLPP #2 and Bordetella #1 on 7/13/2024, along with a microchip
+Juneberry (8/12): DHLPP #2 on 7/13/2024.
+Lingonberry (8/12): DHLPP #2 and Bordetella #1 on 7/13/2024, along with a microchip
+Mulberry (8/12): DHLPP #2 and Bordetella #1 on 7/13/2024, along with a microchip
+Malone: DHLPP #2 on 7/18/2024.
+Coco: DHLPP #2 on 7/20/2024.
+Chanel: DHLPP #2 on 7/20/2024.
+Rayne: DHLPP #2 on 7/20/2024.
+Nibbler: DHLPP #2 on 7/20/2024.
+Frito: DHLPP #1 on 7/8/2024 and a microchip.
+Dorito: DHLPP #1 on 7/8/2024 and a microchip.
+Cheeto: DHLPP #1 on 7/8/2024 and a microchip.
+Funyun: DHLPP #1 on 7/8/2024 and a microchip.
+Pringle: DHLPP #1 on 7/8/2024 and a microchip.
+
+
+
+
+Hi Jodie,
+Your foster(s) have the following vaccines due in the next week: 
+ Phoenix: DHLPP #2 and Bordetella #1 on 5/14/2022.
+
+Your vaccine volunteer is Jodie, they will let you know their availability and you can coordinate from there on date/time/location.
+Thank you!
+The LCDR Team
+
+
+
+Hi Tia,
+Your foster(s) have the following vaccines due in the next week: 
+ Oliver: DHLPP #3 on 5/10/2024.
+Fred: DHLPP #3 on 5/10/2024.
+Fritz: DHLPP #3 on 5/10/2024.
+Karl: DHLPP #3 on 5/10/2024.
+Hans: DHLPP #3 on 5/10/2024.
+
+Your vaccine volunteer is Kimberly, they will let you know their availability and you can coordinate from there on date/time/location.
+Thank you!
+The LCDR Team
+
+
+
+Hi Joel,
+Your foster(s) have the following vaccines due in the next week: 
+ Jackson: DHLPP #3 on 5/10/2024.
+
+Your vaccine volunteer is Kimberly, they will let you know their availability and you can coordinate from there on date/time/location.
+Thank you!
+The LCDR Team
+
+
+
+Hi Nikki,
+Your foster(s) have the following vaccines due in the next week: 
+ Alpha (7/22): DHLPP #3 on 7/18/2024.
+Bravo (7/22): DHLPP #3 on 7/18/2024.
+Delta (7/22): DHLPP #3 on 7/18/2024.
+
+Your vaccine volunteer is Sandra, they will let you know their availability and you can coordinate from there on date/time/location.
+Thank you!
+The LCDR Team
+
+
+
+Hi Cara,
+Your foster(s) have the following vaccines due in the next week: 
+ Charlie (7/22): DHLPP #3 on 7/19/2024.
+Echo (7/22): DHLPP #3 on 7/19/2024.
+
+Your vaccine volunteer is Michelle, they will let you know their availability and you can coordinate from there on date/time/location.
+Thank you!
+The LCDR Team
+
+
+
+Hi Jenni,
+Your foster(s) have the following vaccines due in the next week: 
+ Jade (8/1): DHLPP #2 and Bordetella #1 on 7/15/2024.
+Josie (8/1): DHLPP #2 and Bordetella #1 on 7/15/2024.
+
+Your vaccine volunteer is Michelle, they will let you know their availability and you can coordinate from there on date/time/location.
+Thank you!
+The LCDR Team
+
+
+
+Hi Joanna,
+Your foster(s) have the following vaccines due in the next week: 
+ Joey (8/2): DHLPP #2 and Bordetella #1 on 7/15/2024.
+Jasper (8/2): DHLPP #2 and Bordetella #1 on 7/15/2024.
+
+Your vaccine volunteer is Bruna, they will let you know their availability and you can coordinate from there on date/time/location.
+Thank you!
+The LCDR Team
+
+
+
+Hi Cassie,
+Your foster(s) have the following vaccines due in the next week: 
+ *Carolina: DHLPP #2 on 7/16/2024.
+
+We don't have a vaccine person on-file for you, please let us know who is closest to you from the list below, and we will get them added and tagged.
+Thank you!
+The LCDR Team
+
+
+
+Hi Alana,
+Your foster(s) have the following vaccines due in the next week: 
+ Francesca (7/29): DHLPP #2 and Bordetella #1 on 7/6/2024.
+Anthony (7/29): DHLPP #2 and Bordetella #1 on 7/6/2024.
+
+Your vaccine volunteer is Brian, they will let you know their availability and you can coordinate from there on date/time/location.
+Thank you!
+The LCDR Team
+
+
+
+Hi Meagan,
+Your foster(s) have the following vaccines due in the next week: 
+ Edwina (7/29): DHLPP #2 and Bordetella #1 on 7/6/2024.
+Benedict (7/29): DHLPP #2 and Bordetella #1 on 7/6/2024.
+
+Your vaccine volunteer is Saundra, they will let you know their availability and you can coordinate from there on date/time/location.
+Thank you!
+The LCDR Team
+
+
+
+Hi Christine,
+Your foster(s) have the following vaccines due in the next week: 
+ Ella (7/31): DHLPP #3 on 7/18/2024.
+Coral (7/31): DHLPP #2 and Bordetella #1 on 7/13/2024.
+Everest (7/31): DHLPP #2 and Bordetella #1 on 7/13/2024.
+Zuma (7/31): DHLPP #2 and Bordetella #1 on 7/13/2024.
+Marshall (7/31): DHLPP #2 and Bordetella #1 on 7/13/2024.
+Rubble (7/31): DHLPP #2 and Bordetella #1 on 7/13/2024.
+Ryder (7/31): DHLPP #2 and Bordetella #1 on 7/13/2024.
+
+Your vaccine volunteer is Scott, they will let you know their availability and you can coordinate from there on date/time/location.
+Thank you!
+The LCDR Team
+
+
+
+Hi Lisa,
+Your foster(s) have the following vaccines due in the next week: 
+ Liberty (7/31): DHLPP #2 and Bordetella #1 on 7/13/2024.
+Chase (7/31): DHLPP #2 and Bordetella #1 on 7/13/2024.
+
+Your vaccine volunteer is Michelle, they will let you know their availability and you can coordinate from there on date/time/location.
+Thank you!
+The LCDR Team
+
+
+
+Hi Heather,
+Your foster(s) have the following vaccines due in the next week: 
+ Hannah: DHLPP #2 on 7/16/2024 and a microchip.
+Pied Piper: DHLPP #1 on 7/16/2024 and a microchip.
+Charming: DHLPP #1 on 7/16/2024 and a microchip.
+Phillip: DHLPP #1 on 7/16/2024 and a microchip.
+Bobble: DHLPP #1 on 7/16/2024 and a microchip.
+Guinevere: DHLPP #1 on 7/16/2024 and a microchip.
+Odette: DHLPP #1 on 7/16/2024 and a microchip.
+Little Red: DHLPP #1 on 7/16/2024 and a microchip.
+Thumbelina: DHLPP #1 on 7/16/2024 and a microchip.
+Tiana: DHLPP #1 on 7/16/2024 and a microchip.
+
+Your vaccine volunteer is Brian, they will let you know their availability and you can coordinate from there on date/time/location.
+Thank you!
+The LCDR Team
+
+
+
+Hi Vanessa,
+Your foster(s) have the following vaccines due in the next week: 
+ New York (8/5): DHLPP #2 and Bordetella #1 on 7/12/2024.
+Paris (8/5): DHLPP #2 and Bordetella #1 on 7/12/2024.
+
+Your vaccine volunteer is Michelle, they will let you know their availability and you can coordinate from there on date/time/location.
+Thank you!
+The LCDR Team
+
+
+
+Hi Courtnay,
+Your foster(s) have the following vaccines due in the next week: 
+ Tokyo (8/5): DHLPP #2 and Bordetella #1 on 7/12/2024.
+Dubai (8/5): DHLPP #2 and Bordetella #1 on 7/12/2024.
+São Paulo (8/5): DHLPP #2 and Bordetella #1 on 7/12/2024.
+
+Your vaccine volunteer is Brian, they will let you know their availability and you can coordinate from there on date/time/location.
+Thank you!
+The LCDR Team
+
+
+
+Hi Jacqueline,
+Your foster(s) have the following vaccines due in the next week: 
+ London (8/5): DHLPP #2 and Bordetella #1 on 7/12/2024.
+Beijing (8/5): DHLPP #2 and Bordetella #1 on 7/12/2024.
+
+Your vaccine volunteer is Mandy, they will let you know their availability and you can coordinate from there on date/time/location.
+Thank you!
+The LCDR Team
+
+
+
+Hi Janna,
+Your foster(s) have the following vaccines due in the next week: 
+ Booker: DHLPP #3 on 7/20/2024.
+
+Your vaccine volunteer is Michelle, they will let you know their availability and you can coordinate from there on date/time/location.
+Thank you!
+The LCDR Team
+
+
+
+Hi Tammy,
+Your foster(s) have the following vaccines due in the next week: 
+ Acai Berry (8/12): DHLPP #2 and Bordetella #1 on 7/13/2024, along with a microchip
+Gooseberry (8/12): DHLPP #2 and Bordetella #1 on 7/13/2024, along with a microchip
+Huckleberry (8/12): DHLPP #2 and Bordetella #1 on 7/13/2024, along with a microchip
+Juneberry (8/12): DHLPP #2 on 7/13/2024.
+Lingonberry (8/12): DHLPP #2 and Bordetella #1 on 7/13/2024, along with a microchip
+Mulberry (8/12): DHLPP #2 and Bordetella #1 on 7/13/2024, along with a microchip
+
+Your vaccine volunteer is Scott/saundra, they will let you know their availability and you can coordinate from there on date/time/location.
+Thank you!
+The LCDR Team
+
+
+
+Hi Nicole,
+Your foster(s) have the following vaccines due in the next week: 
+ Malone: DHLPP #2 on 7/18/2024.
+
+We don't have a vaccine person on-file for you, please let us know who is closest to you from the list below, and we will get them added and tagged.
+Thank you!
+The LCDR Team
+
+
+
+Hi Sherry,
+Your foster(s) have the following vaccines due in the next week: 
+ Coco: DHLPP #2 on 7/20/2024.
+Chanel: DHLPP #2 on 7/20/2024.
+
+We don't have a vaccine person on-file for you, please let us know who is closest to you from the list below, and we will get them added and tagged.
+Thank you!
+The LCDR Team
+
+
+
+Hi Kayla,
+Your foster(s) have the following vaccines due in the next week: 
+ Rayne: DHLPP #2 on 7/20/2024.
+Nibbler: DHLPP #2 on 7/20/2024.
+
+We don't have a vaccine person on-file for you, please let us know who is closest to you from the list below, and we will get them added and tagged.
+Thank you!
+The LCDR Team
+
+
+
+Hi None,
+Your foster(s) have the following vaccines due in the next week: 
+ Frito: DHLPP #1 on 7/8/2024 and a microchip.
+Dorito: DHLPP #1 on 7/8/2024 and a microchip.
+Cheeto: DHLPP #1 on 7/8/2024 and a microchip.
+Funyun: DHLPP #1 on 7/8/2024 and a microchip.
+Pringle: DHLPP #1 on 7/8/2024 and a microchip.
+
+We don't have a vaccine person on-file for you, please let us know who is closest to you from the list below, and we will get them added and tagged.
+Thank you!
+The LCDR Team
+
+This completes the vaccines for the week, good job!
