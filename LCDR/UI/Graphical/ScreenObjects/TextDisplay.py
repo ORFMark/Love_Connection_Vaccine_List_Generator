@@ -10,9 +10,10 @@ class TextDisplay(ScreenObject):
         self.y = y;
         self.pygame = pygame
         self.FONT = pygame.font.Font(None, 32)
-        self.text = self.FONT.render(text, True, RGBColors.BLACK.value)
+        self.text = text
 
     def handle_event(self, event):
         return
     def draw(self, screen):
-        screen.blit(self.text, [self.x, self.y])
+        draw = self.FONT.render(self.text, True, RGBColors.BLACK.value)
+        screen.blit(draw, [self.x, self.y])

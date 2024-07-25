@@ -30,7 +30,6 @@ def generateFiles(filepath):
     ws = wb.worksheets[0]
     rowNum = 0
     redCell = ws.cell(19, 2)
-    print(getCellColor(redCell))
     adoptableDogsWithNeeds = []
     adoptedDogsWithNeeds = []
     for row in ws:
@@ -51,7 +50,6 @@ def generateFiles(filepath):
             adoptableDogsWithNeeds.append(dog)
         if (dog.name == None):
             break
-    print(f"There are {len(adoptableDogsWithNeeds)} adoptable pups that need a vaccine")
     ws = wb.worksheets[1]
     rowNum = 0
     for row in ws:
@@ -67,7 +65,6 @@ def generateFiles(filepath):
             adoptedDogsWithNeeds.append(dog)
         if dog.name == None:
             break
-    print(f"There are {len(adoptedDogsWithNeeds)} adopted pups that need a vaccine")
     allDogsWithNeeds = adoptableDogsWithNeeds + adoptedDogsWithNeeds
     exportAdoptableDogMessagesToFile(adoptableDogsWithNeeds)
     exportAdoptedDogMessagesToFile(adoptedDogsWithNeeds)
@@ -86,11 +83,7 @@ def generateFiles(filepath):
             neededBord += 1
         if dogNeedsMicroChip:
             neededChips += 1
-
-
-    print()
-    print(f"There are {len(fostersToContact)} chats to interact with, "
-          f"needing a total of {neededDHLPP} 5/1s, {neededBord} bordetella vaccines, and {neededChips} microchips")
+    return [allDogsWithNeeds, adoptableDogsWithNeeds, adoptedDogsWithNeeds]
 def GUI():
     pygame.init()
     FONT = pygame.font.Font (None, 50)
@@ -100,9 +93,10 @@ def GUI():
     pygame.display.set_caption("LCDR Vaccine List Generator")
     done = False
     buttonColor = COLOR_INACTIVE
-    filePathInputBox = InputBox(pygame, 100, 100, 140, 32)
+    filePathInputBox = InputBox(pygame, 100, 100, 250, 32)
     filePathTextDescriptor = TextDisplay(pygame, 0, 100, "File Path")
-    screenObjects = [filePathInputBox, filePathTextDescriptor]
+    dogSummary = TextDisplay(pygame, 0, 200, "")
+    screenObjects = [filePathInputBox, filePathTextDescriptor, dogSummary]
     while not done:
         input_box = pygame.Rect(100, 100, 140, 32)
 
@@ -118,6 +112,10 @@ def GUI():
                 object.handle_event(event)
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    generateFiles(filePathInputBox.lastConfirmedValue)
+                    try:
+                        pupLists = generateFiles(filePathInputBox.lastConfirmedValue)
+                        screenObjects[2].text = f"There are {len(pupLists[1])} adoptable dogs and {len(pupLists[2])} adopted dogs that need vaccines"
+                    except Exception as e:
+                        screenObjects[2].text = f"{e}"
 
     pygame.quit() ##ends pygame to make it idlefriendly
