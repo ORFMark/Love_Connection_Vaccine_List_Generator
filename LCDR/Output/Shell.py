@@ -78,3 +78,24 @@ def generateVaccinePersonReport(adoptableDogsNeedingVaccines):
         print("%s | %s | %s | %s | %s" % (
         person.center(9, ' '), str(len(fosters)).center(11, ' '), str(neededDHLPP).center(5, ' '),
         str(neededBoard).center(4, " "), str(neededChips).center(5, " ")))
+
+def generateSummarySentence(adoptableDogs, adoptedDogs):
+    allDogs = adoptableDogs + adoptedDogs
+    needs = computeNeeds(allDogs)
+    print(f"There are {len(adoptableDogs)} adoptable dogs and {len(adoptedDogs)} adopted dogs, who need a total of {needs[0]}  5/1, {needs[1]} Bord, and {needs[2]} chips")
+
+
+def computeNeeds(dogList):
+    neededBord = 0
+    neededDHLPP = 0
+    neededChips = 0
+    for dog in dogList:
+        dogHasDHLPPDue = dog.getNextDueDHLPPVaccine() and dog.getNextDueDHLPPVaccine() <= NEXT_WEEK
+        dogHasBordetellaDue = dog.getNextDueBordetellaVaccine() and dog.getNextDueBordetellaVaccine() <= NEXT_WEEK
+        if dogHasDHLPPDue:
+            neededDHLPP += 1
+        if dogHasBordetellaDue:
+            neededBord += 1
+        if not isValidChipCode(dog.chipCode):
+            neededChips += 1
+    return [neededDHLPP, neededBord, neededChips]

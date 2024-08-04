@@ -7,8 +7,8 @@ from LCDR.Excel.DataParser.TypeChecker import isValidChipCode
 from LCDR.Utils import stringifiedDateForFileName, TODAY, NEXT_WEEK, stringifiedDate
 
 
-def generateVaccinePersonReportPNG(listOfDogs):
-    filename = f"../Output/{stringifiedDateForFileName(TODAY)}/Vaccine_Volunteer_Report_{stringifiedDateForFileName(TODAY)}.png"
+def generateVaccinePersonReportPNG(listOfDogs, outputPath):
+    filename = f"{outputPath}/{stringifiedDateForFileName(TODAY)}/Vaccine_Volunteer_Report_{stringifiedDateForFileName(TODAY)}.png"
     img = Image.new(mode = "RGB", size = (500,250))
     draw = ImageDraw.Draw(img)
     font = ImageFont.truetype(r"C:\Users\markr\OneDrive\Documents\Personal\LCDR\UbuntuMono-B.ttf", 16)
@@ -51,8 +51,8 @@ def generateVaccinePersonReportPNG(listOfDogs):
             str(neededBoard).center(4, " "), str(neededChips).center(5, " ")), (255,255,255), font)
         img.save(filename)
 
-def generateVaccinePersonImage(listOfDogs):
-    filename = f"../Output/{stringifiedDateForFileName(TODAY)}/Vaccine_Volunteer_Breakout_{stringifiedDateForFileName(TODAY)}.png"
+def generateVaccinePersonImage(listOfDogs, outputPath):
+    filename = f"{outputPath}/{stringifiedDateForFileName(TODAY)}/Vaccine_Volunteer_Breakout_{stringifiedDateForFileName(TODAY)}.png"
     img = Image.new(mode = "RGB", size = (500,40*len(listOfDogs)))
     draw = ImageDraw.Draw(img)
     font = ImageFont.truetype(r"C:\Users\markr\OneDrive\Documents\Personal\LCDR\UbuntuMono-B.ttf", 20)

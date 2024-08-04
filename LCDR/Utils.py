@@ -25,3 +25,6 @@ def getDogCountsByFoster(listOfDogs):
         else:
             fosters[foster] = [dog]
     return fosters
+
+def dateBetween(canidateDate, start, end):
+    return canidateDate >= start and canidateDate <= end

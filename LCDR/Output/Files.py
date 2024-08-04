@@ -8,7 +8,7 @@ from LCDR.Utils import TODAY, NEXT_WEEK, stringifiedDateForFileName, stringified
 from LCDR.Excel.DataParser.TypeChecker import isValidChipCode
 
 
-def exportMessagesToCSV(adoptableDogsNeedingVaccines):
+def exportMessagesToCSV(adoptableDogsNeedingVaccines, outputPath):
     fostersToNotify = dict()
     for dog in adoptableDogsNeedingVaccines:
         foster = dog.foster
@@ -17,7 +17,7 @@ def exportMessagesToCSV(adoptableDogsNeedingVaccines):
         else:
             fostersToNotify[foster] = [dog]
     fosters = fostersToNotify.keys();
-    with open(f"./Output/{stringifiedDateForFileName(TODAY)}/messages.txt", "w", newline='') as csvFile:
+    with open(f"{outputPath}/{stringifiedDateForFileName(TODAY)}/messages.txt", "w", newline='') as csvFile:
         messageWriter = csv.writer(csvFile, delimiter='\n', quotechar="\t")
         for foster in fosters:
             messageString = "";
@@ -34,8 +34,8 @@ def exportMessagesToCSV(adoptableDogsNeedingVaccines):
             messageWriter.writerow([foster, messageString])
 
 
-def exportAdoptableDogMessagesToFile(adoptableDogsNeedingVaccines):
-    filename = f"./Output/{stringifiedDateForFileName(TODAY)}/Adoptable_Dog_messages_{stringifiedDateForFileName(TODAY)}.txt"
+def exportAdoptableDogMessagesToFile(adoptableDogsNeedingVaccines, outputPath):
+    filename = f"{outputPath}/{stringifiedDateForFileName(TODAY)}/Adoptable_Dog_messages_{stringifiedDateForFileName(TODAY)}.txt"
     fostersToNotify = dict()
     for dog in adoptableDogsNeedingVaccines:
         foster = dog.foster
@@ -68,8 +68,8 @@ def exportAdoptableDogMessagesToFile(adoptableDogsNeedingVaccines):
         f.write("This completes the vaccines for the week, good job!")
 
 
-def exportAdoptedDogMessagesToFile(adoptableDogsNeedingVaccines):
-    filename = f"./Output/{stringifiedDateForFileName(TODAY)}/Adopted_Dog_messages_{stringifiedDateForFileName(TODAY)}.txt"
+def exportAdoptedDogMessagesToFile(adoptableDogsNeedingVaccines, outputPath):
+    filename = f"{outputPath}/{stringifiedDateForFileName(TODAY)}/Adopted_Dog_messages_{stringifiedDateForFileName(TODAY)}.txt"
     fostersToNotify = dict()
 
     with open(filename, "w") as f:
@@ -90,13 +90,14 @@ def exportAdoptedDogMessagesToFile(adoptableDogsNeedingVaccines):
             else:
                 f.write(
                     f"\nWe don't have a vaccine person on-file for you, please let us know who is closest to you from the list below, and we will get them added and tagged.\n")
+            f.write("Please bring your records trifold to your appointment\n")
             f.write("Thank you!\nThe LCDR Team\n\n")
 
         f.write("This completes the vaccines for the week, good job!")
 
 
-def writeEventListToCSVFile(dogsToWrite):
-    filename = f"./Output/{stringifiedDateForFileName(TODAY)}/EventFile_{stringifiedDateForFileName(TODAY)}.csv"
+def writeEventListToCSVFile(dogsToWrite, outputPath):
+    filename = f"{outputPath}/{stringifiedDateForFileName(TODAY)}/EventFile_{stringifiedDateForFileName(TODAY)}.csv"
     with open(filename, "w", newline='\n') as eventFile:
         eventWriter = csv.writer(eventFile)
         eventWriter.writerow(["Dog Name", "Vaccine Volunteer", "Chip", "DHLPP", "DHLPP #", "Bord", "Bord #"])
@@ -125,8 +126,8 @@ def writeEventListToCSVFile(dogsToWrite):
                 [dog.name, dog.vaccinePerson, chipCode, nextDueDHLPP, dhlppDue, nextDueBord, dueBordNumber]
             )
 
-def writeEventListToExcelFile(dogsToWrite):
-    filename = f"./Output/{stringifiedDateForFileName(TODAY)}/EventFile_{stringifiedDateForFileName(TODAY)}.xlsx"
+def writeEventListToExcelFile(dogsToWrite, outputPath):
+    filename = f"{outputPath}/{stringifiedDateForFileName(TODAY)}/EventFile_{stringifiedDateForFileName(TODAY)}.xlsx"
     workbook = openpyxl.Workbook();
     worksheet = workbook.active
     worksheet.append(["Dog Name", "Vaccine Volunteer", "Chip", "DHLPP", "DHLPP #", "Bord", "Bord #"])

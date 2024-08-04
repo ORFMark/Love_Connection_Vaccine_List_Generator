@@ -144,8 +144,9 @@ class AdoptedDogRecord(Dog):
                 result = re.search(DATE_PATTERN_4_DIGIT_YEAR, self.BordetellaDates[i])
                 if (result):
                     self.BordetellaDates[i] = datetime.strptime(result[0], "%m/%d/%Y")
-        self.name = self.name.replace("*", '')
-        self.name = self.name.strip()
-        nameEnd = self.name.find("(")
-        if nameEnd != -1:
-            self.name = self.name[:nameEnd]
+        if self.name is not None:
+            self.name = self.name.replace("*", '')
+            self.name = self.name.strip()
+            nameEnd = self.name.find("(")
+            if nameEnd != -1:
+                self.name = self.name[:nameEnd]
