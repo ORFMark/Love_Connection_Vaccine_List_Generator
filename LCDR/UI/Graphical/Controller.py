@@ -5,7 +5,7 @@ import pygame
 from LCDR.UI.Colors import RGBColors
 from LCDR.UI.Graphical.ScreenObjects.InputBox import InputBox
 from LCDR.UI.Graphical.ScreenObjects.TextDisplay import TextDisplay
-from LCDR.vaccines.vaccineLogic import execute
+from LCDR.vaccines.vaccineLogic import readInDogs, getDogsWithNeeds, generateFiles
 
 PI = math.pi
 
@@ -25,8 +25,9 @@ def GUI():
     buttonColor = COLOR_INACTIVE
     filePathInputBox = InputBox(pygame, 100, 100, 250, 32)
     filePathTextDescriptor = TextDisplay(pygame, 0, 100, "File Path")
-    dogSummary = TextDisplay(pygame, 0, 200, "")
-    screenObjects = [filePathInputBox, filePathTextDescriptor, dogSummary]
+    adoptableDogs = TextDisplay(pygame, 0, 200, "Adoptable Dogs: ?")
+    adoptedDogs = TextDisplay(pygame, 0, 300, "Adopted Dogs: ?")
+    screenObjects = [filePathInputBox, filePathTextDescriptor, adoptableDogs, adoptedDogs]
     while not done:
         input_box = pygame.Rect(100, 100, 140, 32)
 
@@ -44,8 +45,18 @@ def GUI():
                 if event.key == pygame.K_RETURN:
                     try:
                         pupLists = execute(filePathInputBox.lastConfirmedValue)
-                        screenObjects[2].text = f"There are {len(pupLists[0])} adoptable dogs and {len(pupLists[1])} adopted dogs that need vaccines"
+                        screenObjects[2].text = f"Adoptable Dogs: {len(pupLists[0])}"
+                        screenObjects[3].text = f"Adopted Dogs: {len(pupLists[1])}"
                     except Exception as e:
                         screenObjects[2].text = f"{e}"
+                        screenObjects[3].text = ""
 
     pygame.quit() ##ends pygame to make it idlefriendly
+
+
+def execute(inputFilePath):
+    dogs = readInDogs(inputFilePath)
+    adoptableDogsWithNeeds=getDogsWithNeeds(dogs[0])
+    adoptedDogsWithNeeds=getDogsWithNeeds(dogs[1])
+    generateFiles(adoptableDogsWithNeeds, adoptedDogsWithNeeds, "./Output")
+    return [adoptableDogsWithNeeds, adoptedDogsWithNeeds]

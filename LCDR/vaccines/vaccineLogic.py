@@ -44,17 +44,15 @@ def readInDogs(filepath):
     return [adoptableDogs, adoptedDogs]
 
 
-def generateFiles(adoptableDogsWithNeeds, adoptedDogsWithNeeds, outputPath = None):
-    if outputPath is None:
-        outputPath = "./Output"
+def generateFiles(adoptableDogsWithNeeds, adoptedDogsWithNeeds, outputPath = "./Output"):
     if not os.path.exists(f"{outputPath}/{stringifiedDateForFileName(TODAY)}"):
         os.makedirs(f"{outputPath}/{stringifiedDateForFileName(TODAY)}", exist_ok=True)
     allDogsWithNeeds = adoptableDogsWithNeeds + adoptedDogsWithNeeds
-    exportAdoptableDogMessagesToFile(adoptableDogsWithNeeds)
-    exportAdoptedDogMessagesToFile(adoptedDogsWithNeeds)
-    writeEventListToExcelFile(allDogsWithNeeds)
-    generateVaccinePersonReportPNG(allDogsWithNeeds)
-    generateVaccinePersonImage(allDogsWithNeeds)
+    exportAdoptableDogMessagesToFile(adoptableDogsWithNeeds, outputPath)
+    exportAdoptedDogMessagesToFile(adoptedDogsWithNeeds, outputPath)
+    writeEventListToExcelFile(allDogsWithNeeds, outputPath)
+    generateVaccinePersonReportPNG(allDogsWithNeeds, outputPath)
+    generateVaccinePersonImage(allDogsWithNeeds, outputPath)
 
 
 def getDogsWithNeeds(candidateDogs):
@@ -67,9 +65,3 @@ def getDogsWithNeeds(candidateDogs):
     return dogsWithNeeds
 
 
-def execute(inputFilePath):
-    dogs = readInDogs(inputFilePath)
-    adoptableDogsWithNeeds=getDogsWithNeeds(dogs[0])
-    adoptedDogsWithNeeds=getDogsWithNeeds(dogs[1])
-    generateFiles(adoptableDogsWithNeeds, adoptedDogsWithNeeds)
-    return [adoptableDogsWithNeeds, adoptedDogsWithNeeds]
