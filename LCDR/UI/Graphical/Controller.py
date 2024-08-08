@@ -5,7 +5,8 @@ import pygame
 from LCDR.UI.Colors import RGBColors
 from LCDR.UI.Graphical.ScreenObjects.InputBox import InputBox
 from LCDR.UI.Graphical.ScreenObjects.TextDisplay import TextDisplay
-from LCDR.vaccines.vaccineLogic import readInDogs, getDogsWithNeeds, generateFiles
+from LCDR.Utils import computeNeeds
+from LCDR.vaccines.vaccineLogic import readInDogs, getDogsWithNeeds, generateFiles, getOverdueDogs
 
 PI = math.pi
 
@@ -23,11 +24,15 @@ def GUI():
     pygame.display.set_caption("LCDR Vaccine List Generator")
     done = False
     buttonColor = COLOR_INACTIVE
-    filePathInputBox = InputBox(pygame, 100, 100, 250, 32)
-    filePathTextDescriptor = TextDisplay(pygame, 0, 100, "File Path")
-    adoptableDogs = TextDisplay(pygame, 0, 200, "Adoptable Dogs: ?")
-    adoptedDogs = TextDisplay(pygame, 0, 300, "Adopted Dogs: ?")
-    screenObjects = [filePathInputBox, filePathTextDescriptor, adoptableDogs, adoptedDogs]
+    filePathInputBox = InputBox(pygame, 100, 50, 250, 32)
+    filePathTextDescriptor = TextDisplay(pygame, 0, 50, "File Path")
+    adoptableDogs = TextDisplay(pygame, 0, 100, "Adoptable Dogs: ?")
+    adoptedDogs = TextDisplay(pygame, 0, 150, "Adopted Dogs: ?")
+    neededDLHPP = TextDisplay(pygame, 300, 200, "5/1: ?")
+    neededBord = TextDisplay(pygame, 300, 100, "Bord: ?")
+    neededChips = TextDisplay(pygame, 300, 150, "Chips: ?")
+    overdueDogs = TextDisplay(pygame, 0, 200, "Overdue Dogs: ?")
+    screenObjects = [filePathInputBox, filePathTextDescriptor, adoptableDogs, adoptedDogs, neededDLHPP, neededBord, neededChips, overdueDogs]
     while not done:
         input_box = pygame.Rect(100, 100, 140, 32)
 
@@ -45,11 +50,22 @@ def GUI():
                 if event.key == pygame.K_RETURN:
                     try:
                         pupLists = execute(filePathInputBox.lastConfirmedValue)
+                        overdueDogs = getOverdueDogs(pupLists[0] + pupLists[1])
+                        resorces = computeNeeds(pupLists[0] + pupLists[1])
                         screenObjects[2].text = f"Adoptable Dogs: {len(pupLists[0])}"
                         screenObjects[3].text = f"Adopted Dogs: {len(pupLists[1])}"
+                        screenObjects[4].text = f"5/1: {resorces[0]}"
+                        screenObjects[5].text = f"Bord: {resorces[1]}"
+                        screenObjects[6].text = f"Chips: {resorces[2]}"
+                        screenObjects[7].text = f"Overdue Dogs: {len(overdueDogs)}"
                     except Exception as e:
                         screenObjects[2].text = f"{e}"
                         screenObjects[3].text = ""
+                        screenObjects[4].text = ""
+                        screenObjects[5].text = ""
+                        screenObjects[6].text = ""
+                        screenObjects[7].text = ""
+
 
     pygame.quit() ##ends pygame to make it idlefriendly
 

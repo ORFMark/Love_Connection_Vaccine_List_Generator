@@ -8,7 +8,7 @@ from LCDR.Excel.DataParser.DogModels import AdoptableDogRecord, AdoptedDogRecord
 from LCDR.Output.Files import exportAdoptableDogMessagesToFile, exportAdoptedDogMessagesToFile, \
     writeEventListToExcelFile
 from LCDR.Output.PNG import generateVaccinePersonImage, generateVaccinePersonReportPNG
-from LCDR.Utils import stringifiedDateForFileName, TODAY, dateBetween, NEXT_WEEK
+from LCDR.Utils import stringifiedDateForFileName, TODAY, dateBetween, NEXT_WEEK, LAST_MONTH
 
 
 def readInDogs(filepath):
@@ -60,8 +60,17 @@ def getDogsWithNeeds(candidateDogs):
     for dog in candidateDogs:
         dhlpp = dog.getNextDueDHLPPVaccine()
         bord = dog.getNextDueBordetellaVaccine()
-        if (dhlpp is not None and dateBetween(dhlpp, TODAY, NEXT_WEEK)) or (bord is not None and dateBetween(bord, TODAY, NEXT_WEEK)):
+        if (dhlpp is not None and dateBetween(dhlpp, LAST_MONTH, NEXT_WEEK)) or (bord is not None and dateBetween(bord, LAST_MONTH, NEXT_WEEK)):
             dogsWithNeeds.append(dog)
     return dogsWithNeeds
+
+def getOverdueDogs(canidateDogs):
+    overdueDogs = []
+    for dog in canidateDogs:
+        dhlpp = dog.getNextDueDHLPPVaccine()
+        bord = dog.getNextDueBordetellaVaccine()
+        if (dhlpp is not None and dateBetween(dhlpp, LAST_MONTH, TODAY)) or (bord is not None and dateBetween(bord, LAST_MONTH, TODAY)):
+            overdueDogs.append(dog)
+    return overdueDogs
 
 
