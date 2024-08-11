@@ -5,7 +5,8 @@ class CellColor(Enum):
     YELLOW = "FFFFFF00";
     RED = "FFFF0000";
     BRIGHT_GREEN = "FF00FF00";
-    PALE_PINK = "FFF4CCCC"
+    PALE_PINK = "FFF4CCCC";
+    YUCKY_GREEN = "FFB6D7A8"
 
 
 def getCellColor(cell):

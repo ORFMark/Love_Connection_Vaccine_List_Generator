@@ -17,6 +17,8 @@ class Dog:
         self.DHLPPComplete = 0
         self.BordetellaDates = []
         self.BordetellaComplete = 0
+        self.rabiesAdminDate = ""
+        self.rabiesVaccineDuration = 0
     def __str__(self):
         return f"Name: {self.name}, Age (months): {self.ageInMonths}, Gender: {self.gender}"
 
@@ -50,6 +52,11 @@ class Dog:
                 return None
         else:
             return TODAY
+    def getNextRabiesDate(self):
+        try:
+            return self.rabiesAdminDate + timedelta(days=self.rabiesVaccineDuration * 365)
+        except:
+            return None
 
 def dogNeeds(dog):
     dogNeedsDLHPP = dog.getNextDueDHLPPVaccine() and dog.getNextDueDHLPPVaccine() <= NEXT_WEEK
@@ -87,5 +94,6 @@ def generateDogInfoString(dog):
 
 
 def printDogVaccineData(dog):
-    print(f"DHLPP Dates: {dog.DHLPPDates}. Complete: {dog.DHLPPComplete}")
-    print(f"Bord Dates: {dog.BordetellaDates}, Complete: {dog.BordetellaComplete}")
+    print(f"{dog.name}")
+    print(f"\tDHLPP Dates: {dog.DHLPPDates}. Complete: {dog.DHLPPComplete}")
+    print(f"\tBord Dates: {dog.BordetellaDates}, Complete: {dog.BordetellaComplete}")

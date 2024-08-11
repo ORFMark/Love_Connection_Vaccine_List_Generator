@@ -165,3 +165,8 @@ def writeEventListToExcelFile(dogsToWrite, outputPath):
     worksheet.add_table(tab)
 
     workbook.save(filename = filename)
+def writeRabiesNeedsToTXTFile(dogsToWrite, outputPath):
+    filename = f"{outputPath}/{stringifiedDateForFileName(TODAY)}/Rabies_Dogs_{stringifiedDateForFileName(TODAY)}.txt"
+    with open(filename, "w") as f:
+        for dog in dogsToWrite:
+            f.write(f"{dog.name}: {dog.getNextRabiesDate()}\n")

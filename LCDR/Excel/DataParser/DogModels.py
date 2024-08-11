@@ -3,7 +3,7 @@ from datetime import datetime
 
 from LCDR.DataModels.Dog import Dog
 from LCDR.Excel.ColumnNames import AdoptableColums, AdoptedColums
-from LCDR.Excel.DataParser.ColorInterpretor import doesCellCount
+from LCDR.Excel.DataParser.ColorInterpretor import doesCellCount, CellColor, getCellColor
 from LCDR.Utils import DATE_PATTERN_4_DIGIT_YEAR, DATE_PATTERN_2_DIGIT_YEAR
 
 
@@ -21,6 +21,11 @@ class AdoptableDogRecord(Dog):
         self.chipCode = excelRow[AdoptableColums.CHIP_CODE.value].value
         self.ageInMonths = excelRow[AdoptableColums.AGE_IN_MONTHS.value].value
         self.vaccinePerson = excelRow[AdoptableColums.VACCINE_PERSON.value].value
+        self.rabiesAdminDate = excelRow[AdoptableColums.RABIES_DATE.value].value
+        if getCellColor(excelRow[AdoptableColums.RABIES_DATE.value]) == CellColor.YUCKY_GREEN.value:
+            self.rabiesVaccineDuration = 3
+        elif self.rabiesAdminDate is not None and self.rabiesAdminDate != "":
+            self.rabiesVaccineDuration = 1
         self.DHLPPDates = []
         self.DHLPPComplete = 0
         self.BordetellaDates = []
@@ -85,6 +90,11 @@ class AdoptedDogRecord(Dog):
         self.chipCode = excelRow[AdoptedColums.MICROCHIP.value].value
         self.ageInMonths = excelRow[AdoptedColums.AGE_IN_MONTHS.value].value
         self.vaccinePerson = excelRow[AdoptedColums.VACCINE_PERSON.value].value
+        self.rabiesAdminDate = excelRow[AdoptedColums.RABIES_DATE.value].value
+        if getCellColor(excelRow[AdoptableColums.RABIES_DATE.value]) == CellColor.YUCKY_GREEN.value:
+            self.rabiesVaccineDuration = 3
+        elif self.rabiesAdminDate is not None and self.rabiesAdminDate != "":
+            self.rabiesVaccineDuration = 1
         self.DHLPPDates = []
         self.DHLPPComplete = 0
         self.BordetellaDates = []

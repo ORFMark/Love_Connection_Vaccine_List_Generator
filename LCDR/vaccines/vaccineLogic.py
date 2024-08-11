@@ -8,7 +8,8 @@ from LCDR.Excel.DataParser.DogModels import AdoptableDogRecord, AdoptedDogRecord
 from LCDR.Output.Files import exportAdoptableDogMessagesToFile, exportAdoptedDogMessagesToFile, \
     writeEventListToExcelFile
 from LCDR.Output.PNG import generateVaccinePersonImage, generateVaccinePersonReportPNG
-from LCDR.Utils import stringifiedDateForFileName, TODAY, dateBetween, NEXT_WEEK, LAST_MONTH
+from LCDR.Utils import stringifiedDateForFileName, TODAY, dateBetween, NEXT_WEEK, LAST_45_DAYS, NEXT_45_DAYS
+from LCDR.DataModels.Dog import printDogVaccineData
 
 
 def readInDogs(filepath):
@@ -28,8 +29,6 @@ def readInDogs(filepath):
             dog = AdoptableDogRecord(row)
         else:
             break
-        if getCellColor(row[AdoptableColums.VACCINE_PERSON.value]) == CellColor.BRIGHT_GREEN.value:
-            continue
         adoptableDogs.append(dog)
     ws = wb.worksheets[1]
     rowNum = 0
@@ -60,7 +59,7 @@ def getDogsWithNeeds(candidateDogs):
     for dog in candidateDogs:
         dhlpp = dog.getNextDueDHLPPVaccine()
         bord = dog.getNextDueBordetellaVaccine()
-        if (dhlpp is not None and dateBetween(dhlpp, LAST_MONTH, NEXT_WEEK)) or (bord is not None and dateBetween(bord, LAST_MONTH, NEXT_WEEK)):
+        if (dhlpp is not None and dateBetween(dhlpp, LAST_45_DAYS, NEXT_WEEK)) or (bord is not None and dateBetween(bord, LAST_45_DAYS, NEXT_WEEK)):
             dogsWithNeeds.append(dog)
     return dogsWithNeeds
 
@@ -69,8 +68,15 @@ def getOverdueDogs(canidateDogs):
     for dog in canidateDogs:
         dhlpp = dog.getNextDueDHLPPVaccine()
         bord = dog.getNextDueBordetellaVaccine()
-        if (dhlpp is not None and dateBetween(dhlpp, LAST_MONTH, TODAY)) or (bord is not None and dateBetween(bord, LAST_MONTH, TODAY)):
+        if (dhlpp is not None and dateBetween(dhlpp, LAST_45_DAYS, TODAY)) or (bord is not None and dateBetween(bord, LAST_45_DAYS, TODAY)):
             overdueDogs.append(dog)
     return overdueDogs
+
+def getRabiesDogs(canidateDogs):
+    rabiesDogs = []
+    for dog in canidateDogs:
+        if(dog.getNextRabiesDate() is not None and dog.getNextRabiesDate() <= NEXT_45_DAYS):
+            rabiesDogs.append(dog)
+    return rabiesDogs
 
 

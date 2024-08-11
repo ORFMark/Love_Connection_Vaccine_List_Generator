@@ -2,11 +2,12 @@ import math
 
 import pygame
 
+from LCDR.Output.Files import writeRabiesNeedsToTXTFile
 from LCDR.UI.Colors import RGBColors
 from LCDR.UI.Graphical.ScreenObjects.InputBox import InputBox
 from LCDR.UI.Graphical.ScreenObjects.TextDisplay import TextDisplay
 from LCDR.Utils import computeNeeds
-from LCDR.vaccines.vaccineLogic import readInDogs, getDogsWithNeeds, generateFiles, getOverdueDogs
+from LCDR.vaccines.vaccineLogic import readInDogs, getDogsWithNeeds, generateFiles, getOverdueDogs, getRabiesDogs
 
 PI = math.pi
 
@@ -32,7 +33,8 @@ def GUI():
     neededBord = TextDisplay(pygame, 300, 100, "Bord: ?")
     neededChips = TextDisplay(pygame, 300, 150, "Chips: ?")
     overdueDogs = TextDisplay(pygame, 0, 200, "Overdue Dogs: ?")
-    screenObjects = [filePathInputBox, filePathTextDescriptor, adoptableDogs, adoptedDogs, neededDLHPP, neededBord, neededChips, overdueDogs]
+    rabiesDogs = TextDisplay(pygame, 0, 250, "Rabies Dogs: ?")
+    screenObjects = [filePathInputBox, filePathTextDescriptor, adoptableDogs, adoptedDogs, neededDLHPP, neededBord, neededChips, overdueDogs, rabiesDogs]
     while not done:
         input_box = pygame.Rect(100, 100, 140, 32)
 
@@ -58,6 +60,7 @@ def GUI():
                         screenObjects[5].text = f"Bord: {resorces[1]}"
                         screenObjects[6].text = f"Chips: {resorces[2]}"
                         screenObjects[7].text = f"Overdue Dogs: {len(overdueDogs)}"
+                        screenObjects[8].text = f"Rabies Dogs: {len(pupLists[2])}"
                     except Exception as e:
                         screenObjects[2].text = f"{e}"
                         screenObjects[3].text = ""
@@ -65,6 +68,7 @@ def GUI():
                         screenObjects[5].text = ""
                         screenObjects[6].text = ""
                         screenObjects[7].text = ""
+                        screenObjects[8].text = ""
 
 
     pygame.quit() ##ends pygame to make it idlefriendly
@@ -74,5 +78,8 @@ def execute(inputFilePath):
     dogs = readInDogs(inputFilePath)
     adoptableDogsWithNeeds=getDogsWithNeeds(dogs[0])
     adoptedDogsWithNeeds=getDogsWithNeeds(dogs[1])
+    rabiesDogs = getRabiesDogs(dogs[0] + dogs[1])
     generateFiles(adoptableDogsWithNeeds, adoptedDogsWithNeeds, "./Output")
-    return [adoptableDogsWithNeeds, adoptedDogsWithNeeds]
+    if(len(rabiesDogs) > 0):
+        writeRabiesNeedsToTXTFile(rabiesDogs, "./Output")
+    return [adoptableDogsWithNeeds, adoptedDogsWithNeeds, rabiesDogs]

@@ -10,7 +10,8 @@ def stringifiedDate(datetimeToDisplay):
 TODAY = datetime.now()
 NEXT_WEEK = TODAY + timedelta(days=7)
 LAST_WEEK = TODAY - timedelta(days=7)
-LAST_MONTH = TODAY - timedelta(days=45)
+LAST_45_DAYS = TODAY - timedelta(days=45)
+NEXT_45_DAYS = TODAY + timedelta(days=45)
 DATE_PATTERN_4_DIGIT_YEAR = "[0-9]+/[0-9]+/[0-9]{4}"
 DATE_PATTERN_2_DIGIT_YEAR = "[0-9]+/[0-9]+/[0-9]{2}"
 
