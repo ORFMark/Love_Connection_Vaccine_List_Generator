@@ -19,6 +19,7 @@ def readInDogs(filepath):
     rowNum = 0
     adoptableDogs = []
     adoptedDogs = []
+    emptyRows = 0
     for row in ws:
         rowNum += 1
         if rowNum == HEADER_ROW or rowNum == INFO_ROW:
@@ -27,8 +28,11 @@ def readInDogs(filepath):
             continue
         if not row[AdoptableColums.NAME.value].value == None:
             dog = AdoptableDogRecord(row)
+            emptyRows = 0
         else:
-            break
+            emptyRows += 1
+            if(emptyRows >= 20):
+                break
         adoptableDogs.append(dog)
     ws = wb.worksheets[1]
     rowNum = 0
