@@ -28,12 +28,14 @@ def readInDogs(filepath):
             continue
         if not row[AdoptableColums.NAME.value].value == None:
             dog = AdoptableDogRecord(row)
+            adoptableDogs.append(dog)
             emptyRows = 0
+
         else:
             emptyRows += 1
             if(emptyRows >= 20):
                 break
-        adoptableDogs.append(dog)
+
     ws = wb.worksheets[1]
     rowNum = 0
     for row in ws:
