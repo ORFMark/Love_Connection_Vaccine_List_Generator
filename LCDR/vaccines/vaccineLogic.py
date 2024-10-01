@@ -43,6 +43,7 @@ def readInDogs(filepath):
         if rowNum == HEADER_ROW or rowNum == INFO_ROW:
             continue
         dog = AdoptedDogRecord(row)
+        print(dog)
         if getCellColor(row[AdoptableColums.VACCINE_PERSON.value]) == CellColor.BRIGHT_GREEN.value or getCellColor(row[AdoptableColums.NAME.value]) == CellColor.PALE_PINK.value:
             continue
         adoptedDogs.append(dog)

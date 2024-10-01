@@ -8,5 +8,5 @@ def textUI():
     dogs = readInDogs(PATH_TO_FILE)
     generateFiles(dogs[0], dogs[1], OUTPUT_DIRECTORY)
     generateVaccinePersonReport(dogs[0] + dogs[1] )
-    generateSummarySentence(dogs[0] + dogs[1])
+    generateSummarySentence(dogs[0],  dogs[1])
 

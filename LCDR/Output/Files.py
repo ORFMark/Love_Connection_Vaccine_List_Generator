@@ -63,6 +63,7 @@ def exportAdoptableDogMessagesToFile(adoptableDogsNeedingVaccines, outputPath):
             else:
                 f.write(
                     f"\nWe don't have a vaccine person on-file for you, please let us know who is closest to you from the list below, and we will get them added and tagged.\n")
+            f.write("Vaccines can be given up to 3 days before or 3 days after the due date.\n")
             f.write("Thank you!\nThe LCDR Team\n\n")
 
         f.write("This completes the vaccines for the week, good job!")
@@ -90,7 +91,8 @@ def exportAdoptedDogMessagesToFile(adoptableDogsNeedingVaccines, outputPath):
             else:
                 f.write(
                     f"\nWe don't have a vaccine person on-file for you, please let us know who is closest to you from the list below, and we will get them added and tagged.\n")
-            f.write("Please bring your records trifold to your appointment\n")
+            f.write("Vaccines can be given up to 3 days before or 3 days after the due date.\n")
+            f.write("If you have picked up your records, please bring them with you to the appointment. \n")
             f.write("Thank you!\nThe LCDR Team\n\n")
 
         f.write("This completes the vaccines for the week, good job!")
@@ -130,7 +132,7 @@ def writeEventListToExcelFile(dogsToWrite, outputPath):
     filename = f"{outputPath}/{stringifiedDateForFileName(TODAY)}/EventFile_{stringifiedDateForFileName(TODAY)}.xlsx"
     workbook = openpyxl.Workbook();
     worksheet = workbook.active
-    worksheet.append(["Dog Name", "Vaccine Volunteer", "Chip", "DHLPP", "DHLPP #", "Bord", "Bord #"])
+    worksheet.append(["Dog Name", "Vaccine Volunteer", "Chip", "DAPPv [5/1]", "DAPPv [5/1] #", "Bord", "Bord #"])
     for dog in dogsToWrite:
         nextDueDHLPP = dog.getNextDueDHLPPVaccine()
         dhlppDue = dog.DHLPPComplete + 1;

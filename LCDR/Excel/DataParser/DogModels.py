@@ -123,7 +123,7 @@ class AdoptedDogRecord(Dog):
         while ("N/A" in self.BordetellaDates):
             self.BordetellaDates.remove("N/A")
         while ("n/A" in self.BordetellaDates):
-            self.BordetellaDates.remove("N/A")
+            self.BordetellaDates.remove("n/A")
         while ("N/a" in self.BordetellaDates):
             self.BordetellaDates.remove("N/a")
         while ("" in self.BordetellaDates):
