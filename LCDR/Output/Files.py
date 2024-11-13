@@ -172,3 +172,54 @@ def writeRabiesNeedsToTXTFile(dogsToWrite, outputPath):
     with open(filename, "w") as f:
         for dog in dogsToWrite:
             f.write(f"{dog.name}: {dog.getNextRabiesDate()}\n")
+
+def writeVaccineVolunteerReportToXLSX(dogsWithVaccinesDue, outputPath):
+    filename = f"{outputPath}/{stringifiedDateForFileName(TODAY)}/VolunteerReport_{stringifiedDateForFileName(TODAY)}.xlsx"
+    workbook = openpyxl.Workbook();
+    worksheet = workbook.active
+    worksheet.append(["Vaccine Volunteer", "# of chats", "5/1", "Bord", "Chips"])
+    vaccinePeople = dict()
+    for dog in dogsWithVaccinesDue:
+        vaccinePerson = "Unknown"
+        if dog.vaccinePerson and dog.vaccinePerson != '':
+            canidatePerson = dog.vaccinePerson;
+            canidatePerson = canidatePerson.strip()
+            canidatePerson = canidatePerson.lower()
+            canidatePerson = canidatePerson[0].upper() + canidatePerson[1:]
+            vaccinePerson = canidatePerson
+        if vaccinePeople.get(vaccinePerson):
+            vaccinePeople[vaccinePerson].append(dog)
+        else:
+            vaccinePeople[vaccinePerson] = [dog]
+    sortedKeys = list(vaccinePeople.keys())
+    sortedKeys.sort()
+    personNumber = 0
+    for person in sortedKeys:
+        personNumber += 1
+        neededBoard = 0;
+        neededDHLPP = 0;
+        neededChips = 0;
+        fosters = set();
+        for dog in vaccinePeople[person]:
+            fosters.add(dog.foster)
+            dogHasDHLPPDue = dog.getNextDueDHLPPVaccine() and dog.getNextDueDHLPPVaccine() <= NEXT_WEEK
+            dogHasBordetellaDue = dog.getNextDueBordetellaVaccine() and dog.getNextDueBordetellaVaccine() <= NEXT_WEEK
+            if dogHasDHLPPDue:
+                neededDHLPP += 1
+            if dogHasBordetellaDue:
+                neededBoard += 1
+            if not isValidChipCode(dog.chipCode):
+                neededChips += 1
+        worksheet.append(
+            [person, len(fosters), neededDHLPP, neededBoard, neededChips]
+        )
+    tab = Table(displayName="DogEventTable", ref=f"A1:E{len(dogsWithVaccinesDue) + 1}")
+
+    # Add a default style with striped rows and banded columns
+    style = TableStyleInfo(name="TableStyleMedium2", showFirstColumn=False,
+                           showLastColumn=False, showRowStripes=True, showColumnStripes=False)
+    tab.tableStyleInfo = style
+
+    worksheet.add_table(tab)
+
+    workbook.save(filename = filename)

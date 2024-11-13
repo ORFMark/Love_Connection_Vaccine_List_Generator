@@ -115,4 +115,65 @@ def generateVaccinePersonImage(listOfDogs, outputPath):
         lineNumber += 1
     img.save(filename)
 
+def generateSummaryTable(dogsToVaccinate, outputPath = "."):
+    DOG_COLUMN_NAME = "Dog"
+    VAX_VOL_COLUMN_NAME = "Volunteer"
+    FIVE_IN_1_DATE_COLUMN_NAME = "DAPPv [5/1]"
+    FIVE_IN_1_COUNT_COLUMN_NAME = "DAPPv [5/1]#"
+    BORD_DATE_COLUMN_NAME = "Bord"
+    BORD_COUNT_COLUM_NAME = "Bord #"
+    filename = f"{outputPath}/{stringifiedDateForFileName(TODAY)}/Summary_Table_{stringifiedDateForFileName(TODAY)}.png"
+    img = Image.new(mode = "RGB", size = (750,(len(dogsToVaccinate) + 2)*32))
+    draw = ImageDraw.Draw(img)
+    font = ImageFont.truetype(r"C:\Users\markr\OneDrive\Documents\Personal\LCDR\UbuntuMono-B.ttf", 16)
+
+    dogNameList = []
+    volNameList = []
+
+    for dog in dogsToVaccinate:
+        if dog.name is not None:
+            dogNameList.append(dog.name)
+        else:
+            dogNameList.append("")
+        if dog.vaccinePerson is not None:
+            volNameList.append(dog.vaccinePerson)
+        else:
+            volNameList.append("")
+    nameColSize = findMaxLength(dogNameList)
+    volColSize = findMaxLength(volNameList)
+    draw.text((0, 0), "%s|%s|%s|%s|%s|%s" % (DOG_COLUMN_NAME.center(nameColSize + 2, ' '), VAX_VOL_COLUMN_NAME.center(volColSize+2, ' '), FIVE_IN_1_DATE_COLUMN_NAME.center(len(FIVE_IN_1_DATE_COLUMN_NAME) + 2, ' '),FIVE_IN_1_COUNT_COLUMN_NAME.center(len(FIVE_IN_1_COUNT_COLUMN_NAME) + 2, ' '),BORD_DATE_COLUMN_NAME.center(len("MM/DD/YYYY") + 2, ' '),BORD_COUNT_COLUM_NAME.center(len(BORD_COUNT_COLUM_NAME) + 2, ' ')), (255,255,255), font)
+    draw.text((0, 16), "-"*(5+(nameColSize+2)+(volColSize+2)+(len(FIVE_IN_1_DATE_COLUMN_NAME)+2)+(len(FIVE_IN_1_COUNT_COLUMN_NAME) +2 ) + (len("MM/DD/YYYY") +2) + (len(BORD_COUNT_COLUM_NAME) + 2)), (255,255,255), font)
+    lineNumber = 2
+    for i in range(0, len(dogsToVaccinate)):
+        dog = dogsToVaccinate[i]
+        draw.text((0, lineNumber*16), "%s|%s|%s|%s|%s|%s" % (dog.name.center(nameColSize + 2, ' '), vaxVolString(dog).center(volColSize+2, ' '), stringifiedDate(dog.getNextDueDHLPPVaccine()).center(len(FIVE_IN_1_DATE_COLUMN_NAME) + 2, ' '), DAPPCountString(dog).center(len(FIVE_IN_1_COUNT_COLUMN_NAME) + 2, ' '), stringifiedDate(dog.getNextDueBordetellaVaccine()).center(len("MM/DD/YYYY") + 2, ' '), bordCountString(dog).center(len(BORD_COUNT_COLUM_NAME) + 2, ' ')), (255,255,255), font)
+        lineNumber += 1
+        draw.text((0, lineNumber*16), "-"*(5+(nameColSize+2)+(volColSize+2)+(len(FIVE_IN_1_DATE_COLUMN_NAME)+2)+(len(FIVE_IN_1_COUNT_COLUMN_NAME) +2 ) + (len("MM/DD/YYYY") +2) + (len(BORD_COUNT_COLUM_NAME) + 2)), (255,255,255), font)
+        lineNumber += 1
+        img.save(filename)
+def findMaxLength(stringList):
+    maxLength = -1
+    for str in stringList:
+        canidateLen = len(str)
+        if(canidateLen > maxLength):
+            maxLength = canidateLen
+    return maxLength
+
+def DAPPCountString(dog):
+    if(dog.getNextDueDHLPPVaccine()):
+        return str(dog.DHLPPComplete + 1)
+    else:
+        return ""
+def bordCountString(dog):
+    if(dog.getNextDueBordetellaVaccine()):
+        return str(dog.BordetellaComplete + 1)
+    else:
+        return ""
+def vaxVolString(dog):
+    if(dog.vaccinePerson is not None):
+        return dog.vaccinePerson
+    else:
+        return ""
+
+
 

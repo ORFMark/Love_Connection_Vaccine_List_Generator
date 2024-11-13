@@ -6,10 +6,9 @@ from LCDR.Excel.ColumnNames import HEADER_ROW, INFO_ROW, AdoptableColums
 from LCDR.Excel.DataParser.ColorInterpretor import getCellColor, CellColor
 from LCDR.Excel.DataParser.DogModels import AdoptableDogRecord, AdoptedDogRecord
 from LCDR.Output.Files import exportAdoptableDogMessagesToFile, exportAdoptedDogMessagesToFile, \
-    writeEventListToExcelFile
-from LCDR.Output.PNG import generateVaccinePersonImage, generateVaccinePersonReportPNG
+    writeEventListToExcelFile, writeVaccineVolunteerReportToXLSX
+from LCDR.Output.PNG import generateVaccinePersonImage, generateVaccinePersonReportPNG, generateSummaryTable
 from LCDR.Utils import stringifiedDateForFileName, TODAY, dateBetween, NEXT_WEEK, LAST_45_DAYS, NEXT_45_DAYS
-from LCDR.DataModels.Dog import printDogVaccineData
 
 
 def readInDogs(filepath):
@@ -59,6 +58,8 @@ def generateFiles(adoptableDogsWithNeeds, adoptedDogsWithNeeds, outputPath = "./
     writeEventListToExcelFile(allDogsWithNeeds, outputPath)
     generateVaccinePersonReportPNG(allDogsWithNeeds, outputPath)
     generateVaccinePersonImage(allDogsWithNeeds, outputPath)
+    generateSummaryTable(allDogsWithNeeds, outputPath)
+    writeVaccineVolunteerReportToXLSX(allDogsWithNeeds, outputPath)
 
 
 def getDogsWithNeeds(candidateDogs):

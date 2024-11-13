@@ -4,7 +4,12 @@ from LCDR.Excel.DataParser.TypeChecker import isValidChipCode
 
 
 def stringifiedDate(datetimeToDisplay):
-    return f"{datetimeToDisplay.month}/{datetimeToDisplay.day}/{datetimeToDisplay.year}"
+    if type(datetimeToDisplay) is datetime:
+        return f"{datetimeToDisplay.month}/{datetimeToDisplay.day}/{datetimeToDisplay.year}"
+    elif datetimeToDisplay is None:
+        return ""
+    else:
+        raise TypeError(f"datetimeToDisplay must be datetime or None, was {type(datetimeToDisplay)}")
 
 
 TODAY = datetime.now()
