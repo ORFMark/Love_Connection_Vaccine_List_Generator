@@ -10,7 +10,7 @@ from LCDR.Utils import DATE_PATTERN_4_DIGIT_YEAR, DATE_PATTERN_2_DIGIT_YEAR
 class AdoptableDogRecord(Dog):
     def __init__(self, excelRow):
         super().__init__()
-        self.name = excelRow[AdoptableColums.NAME.value].value
+        self.name = str(excelRow[AdoptableColums.NAME.value].value)
         self.name = self.name.replace("*", '')
         self.name = self.name.strip()
         nameEnd = self.name.find("(")
@@ -84,7 +84,7 @@ class AdoptableDogRecord(Dog):
 class AdoptedDogRecord(Dog):
     def __init__(self, excelRow):
         super().__init__()
-        self.name = excelRow[AdoptedColums.LCDR_NAME.value].value
+        self.name = str(excelRow[AdoptedColums.LCDR_NAME.value].value)
         self.gender = excelRow[AdoptedColums.GENDER.value].value
         self.foster = excelRow[AdoptedColums.FOSTER.value].value
         self.chipCode = excelRow[AdoptedColums.MICROCHIP.value].value

@@ -56,9 +56,6 @@ def generateFiles(adoptableDogsWithNeeds, adoptedDogsWithNeeds, outputPath = "./
     exportAdoptableDogMessagesToFile(adoptableDogsWithNeeds, outputPath)
     exportAdoptedDogMessagesToFile(adoptedDogsWithNeeds, outputPath)
     writeEventListToExcelFile(allDogsWithNeeds, outputPath)
-    generateVaccinePersonReportPNG(allDogsWithNeeds, outputPath)
-    generateVaccinePersonImage(allDogsWithNeeds, outputPath)
-    generateSummaryTable(allDogsWithNeeds, outputPath)
     writeVaccineVolunteerReportToXLSX(allDogsWithNeeds, outputPath)
 
 
