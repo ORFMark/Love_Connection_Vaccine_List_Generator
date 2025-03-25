@@ -34,7 +34,7 @@ def GUI():
     neededChips = TextDisplay(pygame, 300, 150, "Chips: ?")
     overdueDogs = TextDisplay(pygame, 0, 200, "Overdue Dogs: ?")
     rabiesDogs = TextDisplay(pygame, 0, 250, "Rabies Dogs: ?")
-    versionString = TextDisplay(pygame, 150, 300, "V1.5.1_NO_PNG Compiled 03/20/2025")
+    versionString = TextDisplay(pygame, 150, 300, "V1.5.1_NO_PNG Compiled 03/25/2025")
     screenObjects = [filePathInputBox, filePathTextDescriptor, adoptableDogs, adoptedDogs, neededDLHPP, neededBord, neededChips, overdueDogs, rabiesDogs, versionString]
     while not done:
         input_box = pygame.Rect(100, 100, 140, 32)
