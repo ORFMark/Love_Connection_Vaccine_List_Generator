@@ -8,7 +8,8 @@ from LCDR.Excel.DataParser.DogModels import AdoptableDogRecord, AdoptedDogRecord
 from LCDR.Output.Files import exportAdoptableDogMessagesToFile, exportAdoptedDogMessagesToFile, \
     writeEventListToExcelFile, writeVaccineVolunteerReportToXLSX
 from LCDR.Output.PNG import generateVaccinePersonImage, generateVaccinePersonReportPNG, generateSummaryTable
-from LCDR.Utils import stringifiedDateForFileName, TODAY, dateBetween, NEXT_WEEK, LAST_45_DAYS, NEXT_45_DAYS
+from LCDR.Utils import stringifiedDateForFileName, TODAY, dateBetween, NEXT_WEEK, LAST_45_DAYS, NEXT_45_DAYS, \
+    sortListOfDogsInLocationOrder
 
 
 def readInDogs(filepath):
@@ -55,6 +56,7 @@ def generateFiles(adoptableDogsWithNeeds, adoptedDogsWithNeeds, outputPath = "./
     allDogsWithNeeds = adoptableDogsWithNeeds + adoptedDogsWithNeeds
     exportAdoptableDogMessagesToFile(adoptableDogsWithNeeds, outputPath)
     exportAdoptedDogMessagesToFile(adoptedDogsWithNeeds, outputPath)
+    # sortedAllDogsWithNeeds = sortListOfDogsInLocationOrder(allDogsWithNeeds)
     writeEventListToExcelFile(allDogsWithNeeds, outputPath)
     writeVaccineVolunteerReportToXLSX(allDogsWithNeeds, outputPath)
 

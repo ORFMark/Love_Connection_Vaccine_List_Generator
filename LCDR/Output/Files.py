@@ -159,7 +159,7 @@ def writeEventListToExcelFile(dogsToWrite, outputPath):
         )
     tab = Table(displayName="DogEventTable", ref=f"A1:G{len(dogsToWrite) + 1}")
 
-# Add a default style with striped rows and banded columns
+# Add a default style with striped rows and columns
     style = TableStyleInfo(name="TableStyleMedium2", showFirstColumn=False,
                        showLastColumn=False, showRowStripes=True, showColumnStripes=False)
     tab.tableStyleInfo = style

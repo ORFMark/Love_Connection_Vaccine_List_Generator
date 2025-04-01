@@ -53,3 +53,18 @@ def computeNeeds(dogList):
         if not isValidChipCode(dog.chipCode):
             neededChips += 1
     return [neededDHLPP, neededBord, neededChips]
+
+def sortListOfDogsInLocationOrder(listOfDogs):
+    sortedListOfDogs = list()
+    listOfVolunteers = list()
+    for dog in listOfVolunteers:
+        if(dog.vaccinePerson not in listOfVolunteers):
+            listOfVolunteers.insert(len(listOfVolunteers), dog.vaccinePerson)
+    listOfVolunteers.sort();
+    for vaxVol in listOfVolunteers:
+        for dog in listOfDogs:
+            if(dog.vaccinePerson == vaxVol):
+                sortedListOfDogs.insert(len(sortedListOfDogs), dog)
+    return sortedListOfDogs
+
+
