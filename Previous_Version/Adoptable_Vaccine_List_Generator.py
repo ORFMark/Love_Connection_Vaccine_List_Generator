@@ -150,8 +150,8 @@ class AdoptableDogRecord:
             return None
         elif len(self.BordetellaDates) == 0:
             return TODAY
-        elif self.BordetellaComplete == len(self.BordetellaDates):
-            return datetime.strptime(self.BordetellaDates[-1], '%m/%d/%Y') + timedelta(days = 365)
+        elif self.BordetellaComplete >= len(self.BordetellaDates):
+            return None
         elif len(self.BordetellaDates) > self.BordetellaComplete:
             return datetime.strptime(self.BordetellaDates[self.BordetellaComplete], '%m/%d/%Y')
         else:
@@ -214,8 +214,8 @@ class AdoptedDogRecord:
             return None
         elif len(self.BordetellaDates) == 0:
             return TODAY
-        elif self.BordetellaComplete == len(self.BordetellaDates):
-            return datetime.strptime(self.BordetellaDates[-1], '%m/%d/%Y') + timedelta(days = 365)
+        elif self.BordetellaComplete >= len(self.BordetellaDates):
+            return None
         elif len(self.BordetellaDates) > self.BordetellaComplete:
             return datetime.strptime(self.BordetellaDates[self.BordetellaComplete], '%m/%d/%Y')
         else:

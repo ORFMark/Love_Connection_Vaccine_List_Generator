@@ -33,9 +33,11 @@ def GUI():
     neededBord = TextDisplay(pygame, 300, 100, "Bord: ?")
     neededChips = TextDisplay(pygame, 300, 150, "Chips: ?")
     overdueDogs = TextDisplay(pygame, 0, 200, "Overdue Dogs: ?")
-    rabiesDogs = TextDisplay(pygame, 0, 250, "Rabies Dogs: ?")
-    versionString = TextDisplay(pygame, 150, 300, "V1.5.1_NO_PNG Compiled 03/25/2025")
-    screenObjects = [filePathInputBox, filePathTextDescriptor, adoptableDogs, adoptedDogs, neededDLHPP, neededBord, neededChips, overdueDogs, rabiesDogs, versionString]
+    rabiesDogs = TextDisplay(pygame, 0, 300, "Rabies Dogs: ?")
+    totalBordNeeded = TextDisplay(pygame, 300, 250, "Total Bord: ?")
+    totalDAPPNeeded = TextDisplay(pygame, 0, 250, "Total DAPP: ?")
+    versionString = TextDisplay(pygame, 150, 350, "V2.0.0_NO_PNG Compiled 04/16/2025")
+    screenObjects = [filePathInputBox, filePathTextDescriptor, adoptableDogs, adoptedDogs, neededDLHPP, neededBord, neededChips, overdueDogs, rabiesDogs, totalBordNeeded, totalDAPPNeeded, versionString]
     while not done:
         input_box = pygame.Rect(100, 100, 140, 32)
 
@@ -80,7 +82,19 @@ def execute(inputFilePath):
     adoptableDogsWithNeeds=getDogsWithNeeds(dogs[0])
     adoptedDogsWithNeeds=getDogsWithNeeds(dogs[1])
     rabiesDogs = getRabiesDogs(dogs[0] + dogs[1])
+    totalVaccinesNeeded = computeTotalVaccineNeed(dogs[0]+dogs[1], -1)
     generateFiles(adoptableDogsWithNeeds, adoptedDogsWithNeeds, "./Output")
     if(len(rabiesDogs) > 0):
         writeRabiesNeedsToTXTFile(rabiesDogs, "./Output")
-    return [adoptableDogsWithNeeds, adoptedDogsWithNeeds, rabiesDogs]
+    return [adoptableDogsWithNeeds, adoptedDogsWithNeeds, rabiesDogs, totalVaccinesNeeded]
+
+def computeTotalVaccineNeed(listOfDogs, numberOFDaysInTheFuture):
+    bordNeeded = 0
+    dappNeeded = 0
+    for dog in listOfDogs:
+        if dog.getNextDueDHLPPVaccine() is not None:
+            dappNeeded += len(dog.DHLPPDates) - dog.DHLPPComplete
+        if dog.getNextDueBordetellaVaccine() is not None:
+            bordNeeded += len(dog.BordetellaDates) - dog.BordetellaComplete
+    return [dappNeeded, bordNeeded]
+

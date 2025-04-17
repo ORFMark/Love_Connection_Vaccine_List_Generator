@@ -2,7 +2,8 @@ import os
 
 import openpyxl
 
-from LCDR.Excel.ColumnNames import HEADER_ROW, INFO_ROW, AdoptableColums
+from LCDR.Excel.ColumnNames import HEADER_ROW, INFO_ROW, AdoptableColums, getAdoptableColumnIndexs, \
+    getAdoptedColumnIndex
 from LCDR.Excel.DataParser.ColorInterpretor import getCellColor, CellColor
 from LCDR.Excel.DataParser.DogModels import AdoptableDogRecord, AdoptedDogRecord
 from LCDR.Output.Files import exportAdoptableDogMessagesToFile, exportAdoptedDogMessagesToFile, \
@@ -20,14 +21,17 @@ def readInDogs(filepath):
     adoptableDogs = []
     adoptedDogs = []
     emptyRows = 0
+    columnIndexDict = dict()
     for row in ws:
         rowNum += 1
-        if rowNum == HEADER_ROW or rowNum == INFO_ROW:
+        if rowNum == INFO_ROW:
             continue
-        if getCellColor(row[AdoptableColums.NAME.value]) == CellColor.PALE_PINK.value:
+        if rowNum == HEADER_ROW:
+            columnIndexDict = getAdoptableColumnIndexs(row)
+        if getCellColor(row[columnIndexDict["NAME"]]) == CellColor.PALE_PINK.value:
             continue
-        if not row[AdoptableColums.NAME.value].value == None:
-            dog = AdoptableDogRecord(row)
+        if not row[columnIndexDict["NAME"]].value is None:
+            dog = AdoptableDogRecord(row, columnIndexDict)
             adoptableDogs.append(dog)
             emptyRows = 0
 
@@ -40,9 +44,11 @@ def readInDogs(filepath):
     rowNum = 0
     for row in ws:
         rowNum += 1
-        if rowNum == HEADER_ROW or rowNum == INFO_ROW:
+        if rowNum == INFO_ROW:
             continue
-        dog = AdoptedDogRecord(row)
+        if rowNum == HEADER_ROW:
+            columnIndexDict = getAdoptedColumnIndex(row)
+        dog = AdoptedDogRecord(row, columnIndexDict)
         print(dog)
         if getCellColor(row[AdoptableColums.VACCINE_PERSON.value]) == CellColor.BRIGHT_GREEN.value or getCellColor(row[AdoptableColums.NAME.value]) == CellColor.PALE_PINK.value:
             continue
