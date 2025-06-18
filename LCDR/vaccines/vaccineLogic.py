@@ -2,7 +2,7 @@ import os
 
 import openpyxl
 
-from LCDR.Excel.ColumnNames import HEADER_ROW, INFO_ROW, AdoptableColums, getAdoptableColumnIndexs, \
+from LCDR.Excel.ColumnNames import HEADER_ROW, INFO_ROW, getAdoptableColumnIndexs, \
     getAdoptedColumnIndex
 from LCDR.Excel.DataParser.ColorInterpretor import getCellColor, CellColor
 from LCDR.Excel.DataParser.DogModels import AdoptableDogRecord, AdoptedDogRecord
@@ -50,7 +50,7 @@ def readInDogs(filepath):
             columnIndexDict = getAdoptedColumnIndex(row)
         dog = AdoptedDogRecord(row, columnIndexDict)
         print(dog)
-        if getCellColor(row[AdoptableColums.VACCINE_PERSON.value]) == CellColor.BRIGHT_GREEN.value or getCellColor(row[AdoptableColums.NAME.value]) == CellColor.PALE_PINK.value:
+        if getCellColor(row[columnIndexDict["VACCINE_PERSON"]]) == CellColor.BRIGHT_GREEN.value or getCellColor(row[columnIndexDict["NAME"]]) == CellColor.PALE_PINK.value:
             continue
         adoptedDogs.append(dog)
     return [adoptableDogs, adoptedDogs]
