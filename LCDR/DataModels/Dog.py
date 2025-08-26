@@ -28,7 +28,7 @@ class Dog:
         elif len(self.DHLPPDates) == 0:
             return TODAY
         elif self.DHLPPComplete >= len(self.DHLPPDates):
-            return None
+            return self.DHLPPDates[-1] + timedelta(days=365)
         elif len(self.DHLPPDates) > self.DHLPPComplete:
             if isinstance(self.DHLPPDates[self.DHLPPComplete], datetime):
                 return self.DHLPPDates[self.DHLPPComplete]
@@ -38,12 +38,11 @@ class Dog:
             return TODAY
 
     def getNextDueBordetellaVaccine(self):
-        if (len(self.BordetellaDates) == 0 and self.BordetellaComplete == 0) or self.BordetellaComplete >= len(
-                self.BordetellaDates):
+        if (len(self.BordetellaDates) == 0 and self.BordetellaComplete == 0)
             return None
         elif len(self.BordetellaDates) == 0:
             return TODAY
-        elif self.BordetellaComplete == len(self.BordetellaDates):
+        elif self.BordetellaComplete >= len(self.BordetellaDates):
             return self.BordetellaDates[-1] + timedelta(days=365)
         elif len(self.BordetellaDates) > self.BordetellaComplete:
             if isinstance(self.BordetellaDates[self.BordetellaComplete], datetime):
