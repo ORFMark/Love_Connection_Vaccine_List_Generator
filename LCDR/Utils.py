@@ -15,7 +15,7 @@ def stringifiedDate(datetimeToDisplay):
 TODAY = datetime.now()
 NEXT_WEEK = TODAY + timedelta(days=7)
 LAST_WEEK = TODAY - timedelta(days=7)
-LAST_45_DAYS = TODAY - timedelta(days=45)
+LAST_180_DAYS = TODAY - timedelta(days=180)
 NEXT_45_DAYS = TODAY + timedelta(days=45)
 DATE_PATTERN_4_DIGIT_YEAR = "[0-9]+/[0-9]+/[0-9]{4}"
 DATE_PATTERN_2_DIGIT_YEAR = "[0-9]+/[0-9]+/[0-9]{2}"
@@ -44,8 +44,8 @@ def computeNeeds(dogList):
     neededDHLPP = 0
     neededChips = 0
     for dog in dogList:
-        dogHasDHLPPDue = dog.getNextDueDHLPPVaccine() and dog.getNextDueDHLPPVaccine() <= NEXT_WEEK
-        dogHasBordetellaDue = dog.getNextDueBordetellaVaccine() and dog.getNextDueBordetellaVaccine() <= NEXT_WEEK
+        dogHasDHLPPDue = vaccineDue(dog.getNextDueDHLPPVaccine())
+        dogHasBordetellaDue = vaccineDue(dog.getNextDueBordetellaVaccine())
         if dogHasDHLPPDue:
             neededDHLPP += 1
         if dogHasBordetellaDue:
@@ -68,3 +68,10 @@ def sortListOfDogsInLocationOrder(listOfDogs):
     return sortedListOfDogs
 
 
+def vaccineDue(vaccineDueDate):
+    if (vaccineDueDate is None):
+        return False
+    elif (type(vaccineDueDate) is not datetime):
+        return False
+    else:
+        return vaccineDueDate <= NEXT_WEEK

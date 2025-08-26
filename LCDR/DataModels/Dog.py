@@ -1,7 +1,8 @@
+import traceback
 from datetime import datetime, timedelta
 
 from LCDR.Excel.DataParser.TypeChecker import isValidChipCode
-from LCDR.Utils import stringifiedDate, NEXT_WEEK
+from LCDR.Utils import stringifiedDate, vaccineDue
 
 
 class Dog:
@@ -28,7 +29,16 @@ class Dog:
         elif len(self.DHLPPDates) == 0:
             return TODAY
         elif self.DHLPPComplete >= len(self.DHLPPDates):
-            return self.DHLPPDates[-1] + timedelta(days=365)
+            if type(self.DHLPPDates[-1]) is datetime:
+                return self.DHLPPDates[-1] + timedelta(days=365)
+            else:
+                try:
+                    return datetime.strptime(self.DHLPPDates[-1], "%m/%d/%y") + timedelta(days=365)
+                except Exception as e:
+                    print(e)
+                    print(traceback.format_exc())
+                    return self.DHLPPDates[-1]
+
         elif len(self.DHLPPDates) > self.DHLPPComplete:
             if isinstance(self.DHLPPDates[self.DHLPPComplete], datetime):
                 return self.DHLPPDates[self.DHLPPComplete]
@@ -43,7 +53,15 @@ class Dog:
         elif len(self.BordetellaDates) == 0:
             return TODAY
         elif self.BordetellaComplete >= len(self.BordetellaDates):
-            return self.BordetellaDates[-1] + timedelta(days=365)
+            if type(self.BordetellaDates[-1]) is datetime:
+                return self.BordetellaDates[-1] + timedelta(days=365)
+            else:
+                try:
+                    return datetime.strptime(self.BordetellaDates[-1], "%m/%d/%y") + timedelta(days=365)
+                except Exception as e:
+                    print(e)
+                    print(traceback.format_exc())
+                    return self.BordetellaDates[-1]
         elif len(self.BordetellaDates) > self.BordetellaComplete:
             if isinstance(self.BordetellaDates[self.BordetellaComplete], datetime):
                 return self.BordetellaDates[self.BordetellaComplete]
@@ -57,10 +75,11 @@ class Dog:
         except:
             return None
 
+
 def dogNeeds(dog):
-    dogNeedsDLHPP = dog.getNextDueDHLPPVaccine() and dog.getNextDueDHLPPVaccine() <= NEXT_WEEK
+    dogNeedsDLHPP = vaccineDue(dog.getNextDueDHLPPVaccine())
     dogNeedsMicroChip = not isValidChipCode(dog.chipCode)
-    dogNeedsBordetella = dog.getNextDueBordetellaVaccine() and dog.getNextDueBordetellaVaccine() <= NEXT_WEEK
+    dogNeedsBordetella = vaccineDue(dog.getNextDueBordetellaVaccine)
     return [dogNeedsDLHPP, dogNeedsBordetella, dogNeedsMicroChip]
 def generateDogInfoString(dog):
     dogInfoString = f"{dog.name}: "

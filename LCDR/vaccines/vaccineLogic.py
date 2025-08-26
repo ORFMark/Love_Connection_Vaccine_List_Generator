@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 import openpyxl
 
@@ -9,7 +10,7 @@ from LCDR.Excel.DataParser.DogModels import AdoptableDogRecord, AdoptedDogRecord
 from LCDR.Output.Files import exportAdoptableDogMessagesToFile, exportAdoptedDogMessagesToFile, \
     writeEventListToExcelFile, writeVaccineVolunteerReportToXLSX
 from LCDR.Output.PNG import generateVaccinePersonImage, generateVaccinePersonReportPNG, generateSummaryTable
-from LCDR.Utils import stringifiedDateForFileName, TODAY, dateBetween, NEXT_WEEK, LAST_45_DAYS, NEXT_45_DAYS, \
+from LCDR.Utils import stringifiedDateForFileName, TODAY, dateBetween, NEXT_WEEK, LAST_180_DAYS, NEXT_45_DAYS, \
     sortListOfDogsInLocationOrder
 
 
@@ -72,7 +73,10 @@ def getDogsWithNeeds(candidateDogs):
     for dog in candidateDogs:
         dhlpp = dog.getNextDueDHLPPVaccine()
         bord = dog.getNextDueBordetellaVaccine()
-        if (dhlpp is not None and dateBetween(dhlpp, LAST_45_DAYS, NEXT_WEEK)) or (bord is not None and dateBetween(bord, LAST_45_DAYS, NEXT_WEEK)):
+        print(dog)
+        print("dhlpp " + str(dhlpp) + " is " + str(type(dhlpp)))
+        print("bord " + str(bord) + " is " + str(type(bord)))
+        if ((dhlpp is not None and type(dhlpp) is datetime) and dateBetween(dhlpp, LAST_180_DAYS, NEXT_WEEK)) or ((bord is not None and type(bord) is datetime) and dateBetween(bord, LAST_180_DAYS, NEXT_WEEK)):
             dogsWithNeeds.append(dog)
     return dogsWithNeeds
 
@@ -81,7 +85,7 @@ def getOverdueDogs(canidateDogs):
     for dog in canidateDogs:
         dhlpp = dog.getNextDueDHLPPVaccine()
         bord = dog.getNextDueBordetellaVaccine()
-        if (dhlpp is not None and dateBetween(dhlpp, LAST_45_DAYS, TODAY)) or (bord is not None and dateBetween(bord, LAST_45_DAYS, TODAY)):
+        if (dhlpp is not None and type(dhlpp) is datetime and dateBetween(dhlpp, LAST_180_DAYS, TODAY)) or (bord is not None and type(bord) is datetime and dateBetween(bord, LAST_180_DAYS, TODAY)):
             overdueDogs.append(dog)
     return overdueDogs
 

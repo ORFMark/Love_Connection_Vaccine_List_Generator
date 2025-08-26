@@ -1,4 +1,5 @@
 import math
+import traceback
 
 import pygame
 
@@ -65,6 +66,9 @@ def GUI():
                         screenObjects[7].text = f"Overdue Dogs: {len(overdueDogs)}"
                         screenObjects[8].text = f"Rabies Dogs: {len(pupLists[2])}"
                     except Exception as e:
+                        print(e)
+                        print(traceback.format_exc())
+
                         screenObjects[2].text = f"{e}"
                         screenObjects[3].text = ""
                         screenObjects[4].text = ""

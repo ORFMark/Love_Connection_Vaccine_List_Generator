@@ -1,10 +1,11 @@
 import csv
+from datetime import datetime
 
 import openpyxl
 from openpyxl.worksheet.table import Table, TableStyleInfo
 
 from LCDR.DataModels.Dog import generateDogInfoString
-from LCDR.Utils import TODAY, NEXT_WEEK, stringifiedDateForFileName, stringifiedDate
+from LCDR.Utils import TODAY, NEXT_WEEK, stringifiedDateForFileName, stringifiedDate, vaccineDue
 from LCDR.Excel.DataParser.TypeChecker import isValidChipCode
 
 
@@ -143,7 +144,7 @@ def writeEventListToExcelFile(dogsToWrite, outputPath):
             dhlppDue = ""
         nextDueBord = dog.getNextDueBordetellaVaccine()
         dueBordNumber = dog.BordetellaComplete + 1
-        if nextDueBord != None and nextDueBord <= NEXT_WEEK:
+        if nextDueBord != None and type(nextDueBord) is datetime and nextDueBord <= NEXT_WEEK:
             nextDueBord = stringifiedDate(nextDueBord)
         else:
             nextDueBord = ""
@@ -202,8 +203,8 @@ def writeVaccineVolunteerReportToXLSX(dogsWithVaccinesDue, outputPath):
         fosters = set();
         for dog in vaccinePeople[person]:
             fosters.add(dog.foster)
-            dogHasDHLPPDue = dog.getNextDueDHLPPVaccine() and dog.getNextDueDHLPPVaccine() <= NEXT_WEEK
-            dogHasBordetellaDue = dog.getNextDueBordetellaVaccine() and dog.getNextDueBordetellaVaccine() <= NEXT_WEEK
+            dogHasDHLPPDue = vaccineDue(dog.getNextDueDHLPPVaccine())
+            dogHasBordetellaDue = vaccineDue(dog.getNextDueBordetellaVaccine())
             if dogHasDHLPPDue:
                 neededDHLPP += 1
             if dogHasBordetellaDue:
