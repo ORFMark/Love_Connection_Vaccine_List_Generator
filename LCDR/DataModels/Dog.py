@@ -38,7 +38,7 @@ class Dog:
             return TODAY
 
     def getNextDueBordetellaVaccine(self):
-        if (len(self.BordetellaDates) == 0 and self.BordetellaComplete == 0)
+        if (len(self.BordetellaDates) == 0 and self.BordetellaComplete == 0):
             return None
         elif len(self.BordetellaDates) == 0:
             return TODAY

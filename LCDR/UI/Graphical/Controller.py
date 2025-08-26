@@ -36,7 +36,7 @@ def GUI():
     rabiesDogs = TextDisplay(pygame, 0, 300, "Rabies Dogs: ?")
     totalBordNeeded = TextDisplay(pygame, 300, 250, "Total Bord: ?")
     totalDAPPNeeded = TextDisplay(pygame, 0, 250, "Total DAPP: ?")
-    versionString = TextDisplay(pygame, 150, 350, "V2.0.1_NO_PNG Compiled Aug 28, 2025")
+    versionString = TextDisplay(pygame, 150, 350, "V2.1.0_NO_PNG Compiled Aug 28, 2025")
     screenObjects = [filePathInputBox, filePathTextDescriptor, adoptableDogs, adoptedDogs, neededDLHPP, neededBord, neededChips, overdueDogs, rabiesDogs, totalBordNeeded, totalDAPPNeeded, versionString]
     while not done:
         input_box = pygame.Rect(100, 100, 140, 32)
