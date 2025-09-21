@@ -76,6 +76,14 @@ class AdoptableDogRecord(Dog):
                 result = re.search(DATE_PATTERN_4_DIGIT_YEAR, self.BordetellaDates[i])
                 if (result):
                     self.BordetellaDates[i] = datetime.strptime(result[0], "%m/%d/%Y")
+        if self.DHLPPComplete > 0:
+            lastCompleteDAPPColName = str.format("DHLPP_{}", self.DHLPPComplete)
+            indexOfLastDAPP = columnIndexDict[lastCompleteDAPPColName]
+            print(str.format("Name: {}, Complete: {}, LastColor: {}", self.name, self.DHLPPComplete, getCellColor(excelRow[indexOfLastDAPP])))
+            if getCellColor(excelRow[indexOfLastDAPP]) == CellColor.THREE_YEAR_GREEN.value:
+                self.lastDAPPVaccineWas3Year = True;
+
+
 
 
 

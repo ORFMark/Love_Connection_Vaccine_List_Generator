@@ -20,20 +20,25 @@ class Dog:
         self.BordetellaComplete = 0
         self.rabiesAdminDate = ""
         self.rabiesVaccineDuration = 0
+        self.lastRabisVaccineWas3Year = False;
+        self.lastDAPPVaccineWas3Year = False;
     def __str__(self):
         return f"Name: {self.name}, Age (months): {self.ageInMonths}, Gender: {self.gender}"
 
     def getNextDueDHLPPVaccine(self):
+        vaxDurationInDays = 365;
+        if self.lastDAPPVaccineWas3Year:
+            vaxDurationInDays = 365 *3
         if len(self.DHLPPDates) == 0 and self.DHLPPComplete == 0:
             return None
         elif len(self.DHLPPDates) == 0:
             return TODAY
         elif self.DHLPPComplete >= len(self.DHLPPDates):
             if type(self.DHLPPDates[-1]) is datetime:
-                return self.DHLPPDates[-1] + timedelta(days=365)
+                return self.DHLPPDates[-1] + timedelta(days=vaxDurationInDays)
             else:
                 try:
-                    return datetime.strptime(self.DHLPPDates[-1], "%m/%d/%y") + timedelta(days=365)
+                    return datetime.strptime(self.DHLPPDates[-1], "%m/%d/%y") + timedelta(days=vaxDurationInDays)
                 except Exception as e:
                     print(e)
                     print(traceback.format_exc())
