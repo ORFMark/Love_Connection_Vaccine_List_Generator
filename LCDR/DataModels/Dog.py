@@ -23,7 +23,7 @@ class Dog:
         self.lastRabisVaccineWas3Year = False;
         self.lastDAPPVaccineWas3Year = False;
     def __str__(self):
-        return f"Name: {self.name}, Age (months): {self.ageInMonths}, Gender: {self.gender}"
+        return f"Name: {self.name}, Age (months): {self.ageInMonths}, Gender: {self.gender}, 5/1 complete: {self.DHLPPComplete}, 5/1 dates {self.DHLPPDates}, bord complete {self.BordetellaComplete}, bord dates {self.BordetellaDates}, chip {self.chipCode}"
 
     def getNextDueDHLPPVaccine(self):
         vaxDurationInDays = 365;

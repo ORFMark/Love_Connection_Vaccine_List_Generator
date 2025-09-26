@@ -16,7 +16,9 @@ from LCDR.Utils import stringifiedDateForFileName, TODAY, dateBetween, NEXT_WEEK
 
 def readInDogs(filepath):
     PATH_TO_FILE = filepath
+    print(str.format("Attempting to load file {}", PATH_TO_FILE))
     wb = openpyxl.load_workbook(PATH_TO_FILE, data_only=True)
+    print("Successfully loaded file!")
     ws = wb.worksheets[0]
     rowNum = 0
     adoptableDogs = []
@@ -33,6 +35,7 @@ def readInDogs(filepath):
             continue
         if not row[columnIndexDict["NAME"]].value is None:
             dog = AdoptableDogRecord(row, columnIndexDict)
+            print(str.format("Read in adoptable dog {} from row {}", dog, rowNum))
             adoptableDogs.append(dog)
             emptyRows = 0
 
@@ -53,6 +56,7 @@ def readInDogs(filepath):
         print(dog)
         if getCellColor(row[columnIndexDict["VACCINE_PERSON"]]) == CellColor.BRIGHT_GREEN.value or getCellColor(row[columnIndexDict["NAME"]]) == CellColor.PALE_PINK.value:
             continue
+        print(str.format("Read in adopted dog {} from row {}", dog, rowNum))
         adoptedDogs.append(dog)
     return [adoptableDogs, adoptedDogs]
 
