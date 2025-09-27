@@ -84,7 +84,7 @@ class Dog:
 def dogNeeds(dog):
     dogNeedsDLHPP = vaccineDue(dog.getNextDueDHLPPVaccine())
     dogNeedsMicroChip = not isValidChipCode(dog.chipCode)
-    dogNeedsBordetella = vaccineDue(dog.getNextDueBordetellaVaccine)
+    dogNeedsBordetella = vaccineDue(dog.getNextDueBordetellaVaccine())
     return [dogNeedsDLHPP, dogNeedsBordetella, dogNeedsMicroChip]
 def generateDogInfoString(dog):
     dogInfoString = f"{dog.name}: "
@@ -103,16 +103,20 @@ def generateDogInfoString(dog):
     else:
         if dogNeedsDLHPP:
             dogInfoString += f"5 in 1 #{dog.DHLPPComplete + 1} on {stringifiedDate(dog.getNextDueDHLPPVaccine())}"
+
         if dogNeedsBordetella and dogNeedsMicroChip:
             dogInfoString += ", "
         elif dogNeedsDLHPP and dogNeedsBordetella:
             dogInfoString += " and "
+
         if dogNeedsBordetella:
             dogInfoString += f"Bordetella #{dog.BordetellaComplete + 1} on {stringifiedDate(dog.getNextDueBordetellaVaccine())}"
+
         if not dogNeedsMicroChip:
             dogInfoString += "."
         else:
             dogInfoString += " and a microchip."
+
     return dogInfoString
 
 
